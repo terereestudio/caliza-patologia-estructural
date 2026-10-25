@@ -184,7 +184,9 @@ p{margin:0}
 .hero-visual{width:100%;max-width:520px;justify-self:center}
 .hero-visual svg{width:100%;height:auto;overflow:visible}
 @media (max-width:599px){
-  .hero-facts{grid-template-columns:1fr}
+  .hero{padding-top:calc(var(--header-h) + 32px)}
+  .hero-facts{display:none}
+  .hero-grid{gap:var(--s5)}
   .hero-ctas .btn{width:100%}
 }
 @media (min-width:960px){
@@ -192,14 +194,37 @@ p{margin:0}
   .hero-visual{justify-self:end}
 }
 
-/* animación del escaneo */
-.scan-bar{animation:scan 6s cubic-bezier(.45,0,.55,1) infinite alternate}
-@keyframes scan{from{transform:translateX(0)}to{transform:translateX(330px)}}
-.hit{opacity:.25;animation:hit 6s linear infinite alternate}
-.hit:nth-of-type(2){animation-delay:.9s}.hit:nth-of-type(3){animation-delay:1.8s}.hit:nth-of-type(4){animation-delay:2.7s}.hit:nth-of-type(5){animation-delay:3.6s}
-@keyframes hit{0%,40%{opacity:.25}50%,100%{opacity:1}}
-.target-ring{transform-origin:center;transform-box:fill-box;animation:pulse 2.4s ease-out infinite}
-@keyframes pulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.8);opacity:0}}
+/* animación del hero (ciclo de 9 s): la mira busca, la estructura vibra,
+   aparece la fisura y una lupa muestra el detalle de la falla.
+   Los estilos base son el estado final, así con movimiento reducido se ve el diagnóstico completo. */
+.hv-scan{animation:scan 9s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes scan{0%{transform:translateX(0)}45%{transform:translateX(330px)}90%,100%{transform:translateX(0)}}
+.hit{opacity:1;animation:hit 9s linear infinite}
+.hit:nth-of-type(2){animation-delay:.5s}.hit:nth-of-type(3){animation-delay:1s}.hit:nth-of-type(4){animation-delay:1.5s}.hit:nth-of-type(5){animation-delay:2s}
+@keyframes hit{0%,8%{opacity:.2}14%,90%{opacity:1}100%{opacity:.2}}
+
+.hv-slab{animation:shake 9s linear infinite}
+@keyframes shake{0%,43%{transform:translate(0,0)}44%{transform:translate(-4px,1px)}45%{transform:translate(4px,-1px)}46%{transform:translate(-3px,1px)}47%{transform:translate(3px,0)}48%{transform:translate(-1px,0)}49%,100%{transform:translate(0,0)}}
+
+.hv-target{transform:translate(250px,250px);color:#e8a93c;animation:seek 9s cubic-bezier(.65,0,.35,1) infinite,tcolor 9s linear infinite}
+@keyframes seek{
+  0%{transform:translate(100px,140px)}
+  12%{transform:translate(190px,96px)}
+  24%{transform:translate(110px,300px)}
+  36%{transform:translate(310px,320px)}
+  46%,90%{transform:translate(250px,250px)}
+  100%{transform:translate(100px,140px)}}
+@keyframes tcolor{0%,46%{color:#ffffff}49%,88%{color:#e8a93c}94%,100%{color:#ffffff}}
+.hv-ring{transform-origin:center;transform-box:fill-box;animation:pulse 1.5s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.7);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+
+.hv-crack{stroke-dasharray:150;stroke-dashoffset:0;animation:crack 9s linear infinite}
+@keyframes crack{0%,47%{stroke-dashoffset:150;opacity:0}48%{opacity:1}56%,88%{stroke-dashoffset:0;opacity:1}94%,100%{stroke-dashoffset:0;opacity:0}}
+
+.hv-lens{transform-origin:center;transform-box:fill-box;animation:lens 9s cubic-bezier(.2,.8,.2,1) infinite}
+@keyframes lens{0%,54%{opacity:0;transform:scale(.15)}62%,88%{opacity:1;transform:scale(1)}94%,100%{opacity:0;transform:scale(.15)}}
+.hv-link{animation:link 9s linear infinite}
+@keyframes link{0%,55%{opacity:0}60%,88%{opacity:1}93%,100%{opacity:0}}
 
 /* corte irregular (borde fisurado del isotipo) */
 .crack-edge{position:absolute;left:0;right:0;bottom:-1px;height:clamp(28px,4vw,56px);color:var(--stone-100)}
@@ -332,9 +357,53 @@ section{position:relative}
 .footer-legal{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--line-dark);font-size:var(--fs-xs);font-family:var(--font-mono);letter-spacing:.06em}
 @media (min-width:800px){.footer-inner{grid-template-columns:auto 1fr auto}.footer-inner nav{justify-content:center}}
 
+/* --- Instagram --- */
+.ig-head{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:flex-end;justify-content:space-between;margin-bottom:clamp(32px,4vw,48px)}
+.ig-head .section-head{margin-bottom:0}
+.ig-feed{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));align-items:start}
+.ig-feed .instagram-media{min-width:0!important;width:100%!important;margin:0!important;border:1px solid var(--line-light)!important;border-radius:2px!important;box-shadow:none!important}
+.ig-empty{border:1px solid var(--line-light);background:var(--white);padding:clamp(24px,4vw,40px);display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center;justify-content:space-between}
+.ig-empty .handle{display:flex;align-items:center;gap:var(--s3)}
+.ig-empty .handle img{width:64px;height:64px;border-radius:50%}
+.ig-empty b{display:block;font-family:var(--font-head);font-size:var(--fs-h3);color:var(--navy-950)}
+.ig-empty span{color:var(--text-muted);font-size:var(--fs-sm)}
+
+/* --- Firma Tereré Estudio --- */
+.firma-te {
+  background: #161415;
+  padding: 14px 16px;
+  text-align: center;
+}
+.firma-te a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #F3E9DA;
+  text-decoration: none;
+  font: 500 14px/1 system-ui, sans-serif;
+}
+.firma-te img {
+  height: 28px;
+  width: auto;
+  opacity: 0.9;
+}
+.firma-te a:hover img,
+.firma-te a:focus-visible img {
+  opacity: 1;
+}
+.firma-te a:focus-visible {
+  outline: 2px solid #9FBD2B;
+  outline-offset: 4px;
+}
+@media (max-width: 600px) {
+  .firma-te img { height: 24px; }
+}
+
 /* --- WhatsApp flotante --- */
 .wa-float{position:fixed;right:16px;bottom:16px;z-index:90;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);transition:transform .2s}
 .wa-float:hover{transform:scale(1.06)}
+.wa-float.lift{bottom:72px}
+.wa-float{transition:transform .2s,bottom .3s}
 .wa-float svg{width:30px;height:30px}
 
 /* --- Revelado al scrollear --- */
@@ -345,7 +414,6 @@ section{position:relative}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
-  .hit{opacity:1}
 }
 </style>
 </head>
@@ -414,7 +482,7 @@ section{position:relative}
       <div>
         <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>Ingeniería civil · Patología estructural</span>
         <h1 id="hero-title">Diagnóstico preciso para estructuras de hormigón.</h1>
-        <p class="lead">Inspeccionamos tu estructura con tecnología no destructiva, detectamos fisuras, corrosión y otros daños que pueden comprometer su resistencia, y te proponemos la solución adecuada para garantizar su seguridad y durabilidad.</p>
+        <p class="lead">Detectamos fisuras, corrosión y otras patologías con tecnología no destructiva, y te proponemos la solución adecuada para cada caso.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero solicitar una inspección estructural.">
             <svg aria-hidden="true"><use href="#i-wa"/></svg>Solicitá una inspección
@@ -428,37 +496,81 @@ section{position:relative}
         </ul>
       </div>
 
-      <!-- Visual: relevamiento de un elemento de hormigón (recursos gráficos del isotipo: borde fisurado, pórtico y mira) -->
+      <!-- Visual: la mira recorre el elemento, la estructura vibra, aparece una fisura y la lupa muestra el detalle (recursos del isotipo: borde fisurado, pórtico y mira) -->
       <div class="hero-visual" aria-hidden="true">
         <svg viewBox="0 0 480 420" fill="none">
+          <defs>
+            <clipPath id="lens-clip"><circle cx="380" cy="146" r="58"/></clipPath>
+          </defs>
           <!-- pórtico -->
           <path d="M210 74H470M432 24V360" stroke="#3a4a5e" stroke-width="12"/>
-          <!-- elemento de hormigón con borde fisurado -->
-          <path d="M30 24H176L212 66L246 74L234 112L286 168L330 188L350 248H392L400 290L440 326L470 336V400H30Z" fill="#818d8d" fill-opacity=".16" stroke="#818d8d" stroke-width="1.5"/>
-          <!-- armaduras detectadas -->
-          <g stroke="#a8b3bd" stroke-width="1.2" stroke-dasharray="4 5" opacity=".7">
-            <path d="M50 300H450M50 360H460"/>
-            <path d="M90 60V390M170 60V390"/>
+
+          <g class="hv-slab">
+            <!-- elemento de hormigón con borde fisurado -->
+            <path d="M30 24H176L212 66L246 74L234 112L286 168L330 188L350 248H392L400 290L440 326L470 336V400H30Z" fill="#818d8d" fill-opacity=".16" stroke="#818d8d" stroke-width="1.5"/>
+            <!-- armaduras -->
+            <g stroke="#a8b3bd" stroke-width="1.2" stroke-dasharray="4 5" opacity=".7">
+              <path d="M50 300H450M50 360H460"/>
+              <path d="M90 60V390M170 60V390"/>
+            </g>
+            <g fill="#d6dbdb">
+              <circle class="hit" cx="90" cy="300" r="5"/>
+              <circle class="hit" cx="170" cy="300" r="5"/>
+              <circle class="hit" cx="250" cy="300" r="5"/>
+              <circle class="hit" cx="330" cy="300" r="5"/>
+              <circle class="hit" cx="410" cy="300" r="5"/>
+            </g>
+            <!-- fisura que aparece -->
+            <path class="hv-crack" d="M222 212L236 230L231 243L248 257L243 270L262 283L257 295L282 306" stroke="#e8a93c" stroke-width="2.5" stroke-linejoin="bevel"/>
           </g>
-          <g fill="#d6dbdb">
-            <circle class="hit" cx="90" cy="300" r="5"/>
-            <circle class="hit" cx="170" cy="300" r="5"/>
-            <circle class="hit" cx="250" cy="300" r="5"/>
-            <circle class="hit" cx="330" cy="300" r="5"/>
-            <circle class="hit" cx="410" cy="300" r="5"/>
-          </g>
-          <!-- barra de escaneo -->
-          <g class="scan-bar">
+
+          <!-- barra de escaneo 2D -->
+          <g class="hv-scan">
             <rect x="60" y="270" width="2" height="120" fill="#ffffff" opacity=".85"/>
             <rect x="40" y="252" width="42" height="18" fill="#ffffff"/>
             <text x="61" y="265" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#061323" letter-spacing="1">2D</text>
           </g>
-          <!-- mira sobre la fisura -->
-          <g transform="translate(118 176)">
-            <circle class="target-ring" r="30" stroke="#ffffff" stroke-width="1.5" opacity=".6"/>
-            <circle r="30" stroke="#ffffff" stroke-width="3"/>
-            <path d="M0-52V52M-52 0H52" stroke="#ffffff" stroke-width="3"/>
+
+          <!-- vínculo mira → lupa -->
+          <path class="hv-link" d="M270 232L330 186" stroke="#e8a93c" stroke-width="1.5" stroke-dasharray="3 4"/>
+
+          <!-- lupa: detalle de armadura oxidada y fisura -->
+          <g class="hv-lens">
+            <circle cx="380" cy="146" r="58" fill="#1d2833"/>
+            <g clip-path="url(#lens-clip)">
+              <!-- textura del hormigón -->
+              <g fill="#3a4653">
+                <circle cx="342" cy="112" r="4"/><circle cx="360" cy="196" r="5"/><circle cx="414" cy="108" r="3"/>
+                <circle cx="428" cy="186" r="4"/><circle cx="398" cy="122" r="2.5"/><circle cx="336" cy="170" r="3"/>
+              </g>
+              <!-- recubrimiento desprendido -->
+              <path d="M324 132L352 126L372 134L400 128L436 136V164L404 170L376 164L350 172L324 166Z" fill="#0f1822"/>
+              <!-- barra de acero con nervaduras -->
+              <rect x="320" y="141" width="124" height="10" fill="#8d979f"/>
+              <path d="M330 141v10M340 141v10M350 141v10M360 141v10M370 141v10M380 141v10M390 141v10M400 141v10M410 141v10M420 141v10M430 141v10" stroke="#5e6870" stroke-width="2"/>
+              <!-- corrosión -->
+              <g fill="#b4612f">
+                <ellipse cx="368" cy="146" rx="13" ry="7"/>
+                <ellipse cx="398" cy="145" rx="9" ry="6"/>
+                <ellipse cx="350" cy="147" rx="5" ry="4" opacity=".8"/>
+              </g>
+              <path d="M370 152c0 10 3 18 1 30M398 151c1 8-1 14 1 22" stroke="#b4612f" stroke-width="3" opacity=".55"/>
+              <!-- fisura ampliada -->
+              <path d="M346 90L362 112L356 124L372 134M392 160L384 172L400 186L394 204" stroke="#e8a93c" stroke-width="3" stroke-linejoin="bevel"/>
+            </g>
+            <circle cx="380" cy="146" r="58" stroke="#ffffff" stroke-width="2"/>
+            <path d="M380 82v10M380 200v10M316 146h10M434 146h10" stroke="#ffffff" stroke-width="2"/>
+            <rect x="314" y="216" width="132" height="20" fill="#061323"/>
+            <text x="380" y="230" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.4" fill="#e8a93c">FALLA DETECTADA</text>
           </g>
+
+          <!-- mira que recorre y detecta -->
+          <g class="hv-target">
+            <circle class="hv-ring" r="30" stroke="currentColor" stroke-width="1.5"/>
+            <circle r="30" stroke="currentColor" stroke-width="3"/>
+            <path d="M0-52V52M-52 0H52" stroke="currentColor" stroke-width="3"/>
+          </g>
+
           <!-- rótulos técnicos -->
           <g font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.6" fill="#a8b3bd">
             <text x="30" y="14">PUNTO DE INSPECCIÓN</text>
@@ -665,6 +777,32 @@ section{position:relative}
     </div>
   </section>
 
+  <!-- ======================= INSTAGRAM ======================= -->
+  <section class="section bg-stone on-light" id="instagram" aria-labelledby="ig-title">
+    <div class="container">
+      <div class="ig-head reveal">
+        <div class="section-head">
+          <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>07 — En obra</span>
+          <h2 id="ig-title">Seguí nuestro trabajo en Instagram.</h2>
+          <p>Inspecciones, casos y novedades en @caliza.patologia.</p>
+        </div>
+        <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-ig"/></svg>Seguinos
+        </a>
+      </div>
+      <!-- Se completa con los enlaces de IG_POSTS (ver script al final) -->
+      <div class="ig-feed reveal" id="ig-feed">
+        <div class="ig-empty">
+          <div class="handle">
+            <img src="assets/img/caliza-isotipo.png" alt="" width="64" height="64" loading="lazy">
+            <div><b>@caliza.patologia</b><span>Ingeniería civil · Patología estructural</span></div>
+          </div>
+          <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">Ver perfil</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- ======================= FOOTER ======================= -->
@@ -677,12 +815,21 @@ section{position:relative}
         <a href="#metodo">Cómo trabajamos</a>
         <a href="#equipo">Equipo</a>
         <a href="#contacto">Contacto</a>
+        <a href="#instagram">Instagram</a>
       </nav>
       <a href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">@caliza.patologia</a>
     </div>
     <p class="footer-legal">© <span id="year">2026</span> CALIZA Patología Estructural · <span class="todo">[COMPLETAR: ciudad, provincia]</span></p>
   </div>
 </footer>
+
+<!-- Firma Tereré Estudio -->
+<div class="firma-te">
+  <a href="https://terereestudio.com.ar" rel="noopener">
+    <span>Desarrollado por</span>
+    <img src="assets/img/firma-terereestudio.webp" width="360" height="120" alt="Tereré Estudio" loading="lazy">
+  </a>
+</div>
 
 <!-- WhatsApp flotante -->
 <a class="wa-float js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero hacer una consulta." aria-label="Escribinos por WhatsApp" target="_blank" rel="noopener">
@@ -738,8 +885,28 @@ section{position:relative}
     if(form.localidad.value.trim()) lines.push('Localidad: ' + form.localidad.value.trim());
     lines.push('Motivo: ' + form.motivo.value);
     if(form.mensaje.value.trim()) lines.push(form.mensaje.value.trim());
-    window.open('https://wa.me/5493624205886?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    var numeros = ['5493624205886','5493624384988']; // Matías, Germán
+    var destino = numeros[Math.random() < .5 ? 0 : 1];
+    window.open('https://wa.me/' + destino + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
   });
+
+  // Sube el botón de WhatsApp cuando se ve la firma, para no taparla
+  var firma = document.querySelector('.firma-te'), wa = document.querySelector('.wa-float');
+  if('IntersectionObserver' in window && firma && wa){
+    new IntersectionObserver(function(e){ wa.classList.toggle('lift', e[0].isIntersecting); }).observe(firma);
+  }
+
+  /* Instagram: pegá acá los enlaces de posteos o reels (ej. https://www.instagram.com/p/XXXX/ o /reel/XXXX/).
+     Si la lista está vacía se muestra la tarjeta del perfil. */
+  var IG_POSTS = [];
+  if(IG_POSTS.length){
+    var feed = document.getElementById('ig-feed');
+    feed.innerHTML = IG_POSTS.map(function(url){
+      return '<blockquote class="instagram-media" data-instgrm-permalink="' + url + '?utm_source=ig_embed" data-instgrm-version="14"><a href="' + url + '" target="_blank" rel="noopener">Ver en Instagram</a></blockquote>';
+    }).join('');
+    var sc = document.createElement('script'); sc.async = true; sc.src = 'https://www.instagram.com/embed.js';
+    document.body.appendChild(sc);
+  }
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
