@@ -384,6 +384,14 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
 .ig-head .section-head{margin-bottom:0}
 .ig-feed{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));align-items:start}
 .ig-feed .instagram-media{min-width:0!important;width:100%!important;margin:0!important;border:1px solid var(--line-light)!important;border-radius:2px!important;box-shadow:none!important}
+@media (max-width:699px){
+  .ig-feed{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:var(--s3);margin-inline:calc(var(--gutter) * -1);padding:4px var(--gutter) 8px;scroll-padding-inline:var(--gutter);scrollbar-width:none}
+  .ig-feed::-webkit-scrollbar{display:none}
+  .ig-feed > *{flex:0 0 86%;scroll-snap-align:start}
+  .ig-feed .ig-empty{flex-basis:100%}
+}
+.ig-hint{display:none;margin-top:var(--s3);font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);text-align:center}
+@media (max-width:699px){.ig-hint{display:block}}
 .ig-empty{border:1px solid var(--line-light);background:var(--white);padding:clamp(24px,4vw,40px);display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center;justify-content:space-between}
 .ig-empty .handle{display:flex;align-items:center;gap:var(--s3)}
 .ig-empty .handle img{width:64px;height:64px;border-radius:50%}
@@ -826,6 +834,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">Ver perfil</a>
         </div>
       </div>
+      <p class="ig-hint" aria-hidden="true">Deslizá para ver más →</p>
     </div>
   </section>
 
@@ -950,7 +959,13 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
 
   /* Instagram: pegá acá los enlaces de posteos o reels (ej. https://www.instagram.com/p/XXXX/ o /reel/XXXX/).
      Si la lista está vacía se muestra la tarjeta del perfil. */
-  var IG_POSTS = [];
+  var IG_POSTS = [
+    'https://www.instagram.com/reel/DewqN7RxznD/',
+    'https://www.instagram.com/reel/Dec01E6RCgx/',
+    'https://www.instagram.com/reel/DMRDXH2M5_d/',
+    'https://www.instagram.com/reel/DHcF9FisT8O/',
+    'https://www.instagram.com/reel/DL3RuvtMP4e/'
+  ];
   if(IG_POSTS.length){
     var feed = document.getElementById('ig-feed');
     feed.innerHTML = IG_POSTS.map(function(url){
