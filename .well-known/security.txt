@@ -1,3 +1,4 @@
-Contact: https://terereestudio.com.ar
+Contact: mailto:[COMPLETAR: email de seguridad de Tereré Estudio]
 Expires: 2027-10-25T00:00:00.000Z
 Preferred-Languages: es, en
+Canonical: https://[COMPLETAR: dominio definitivo]/.well-known/security.txt
