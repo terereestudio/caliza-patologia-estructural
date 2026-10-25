@@ -370,12 +370,12 @@ section{position:relative}
 .team-copy h2{font-size:var(--fs-h2);color:var(--navy-950);margin-top:var(--s3)}
 .team-copy p{margin-top:var(--s4);color:var(--text-muted);font-size:var(--fs-lg);max-width:54ch}
 .team-copy p strong{color:var(--navy-950);font-weight:600}
-.partners{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
-.partners li{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line-light);padding-top:var(--s3)}
+.partners{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+@media (min-width:900px){.partners{grid-column:1 / -1;grid-template-columns:1.15fr 1fr;gap:var(--s6)}}
+.partners li{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:var(--s3);row-gap:4px;border-top:1px solid var(--line-light);padding-top:var(--s3)}
 .partners b{font-family:var(--font-head);font-size:var(--fs-h3);color:var(--navy-950);font-weight:600}
 .partners span{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
 @media (min-width:900px){.team{grid-template-columns:1.15fr 1fr;gap:var(--s6)}.team-photo{margin-top:6px}}
-.team-photo .partners{margin-top:var(--s4)}
 #equipo{padding-block:clamp(56px,6vw,96px)}
 
 /* --- FAQ --- */
@@ -777,16 +777,16 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           <span class="name-tag" style="--x:18%;--y:84%" aria-hidden="true"><span class="ghost">Germán</span><span class="tw"></span></span>
           <span class="name-tag" style="--x:84%;--y:84%" aria-hidden="true"><span class="ghost">Matías</span><span class="tw"></span></span>
         </div>
-          <ul class="partners">
-            <li><b>Germán <span class="todo">[COMPLETAR: apellido]</span></b><span>Ingeniero civil · Mat. <span class="todo">[COMPLETAR]</span></span></li>
-            <li><b>Matías <span class="todo">[COMPLETAR: apellido]</span></b><span>Ingeniero civil · Mat. <span class="todo">[COMPLETAR]</span></span></li>
-          </ul>
       </figure>
       <div class="team-copy reveal">
         <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>04 — Quiénes somos</span>
         <h2 id="equipo-title">Somos Matías y Germán, y juntos creamos CALIZA.</h2>
         <p>Somos <strong>ingenieros civiles</strong> con experiencia en cálculo estructural, inspección y análisis de patologías en estructuras de hormigón. Nos especializamos en detectar fallas a tiempo y en ofrecer soluciones que garanticen la <strong>seguridad y durabilidad</strong> de cada construcción.</p>
       </div>
+      <ul class="partners reveal">
+        <li><b>Germán <span class="todo">[COMPLETAR: apellido]</span></b><span>Ingeniero civil · Mat. <span class="todo">[COMPLETAR]</span></span></li>
+        <li><b>Matías <span class="todo">[COMPLETAR: apellido]</span></b><span>Ingeniero civil · Mat. <span class="todo">[COMPLETAR]</span></span></li>
+      </ul>
     </div>
   </section>
 
