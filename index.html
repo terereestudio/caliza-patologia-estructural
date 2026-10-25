@@ -337,11 +337,12 @@ section{position:relative}
 .step h3{font-size:var(--fs-h3);font-weight:600;color:var(--white)}
 .step p{color:var(--on-dark-muted);font-size:var(--fs-sm);margin-top:6px;max-width:40ch}
 .diffs{display:grid;gap:var(--s3);margin-top:var(--s6)}
-.diff{border:1px solid var(--line-dark);padding:var(--s4);display:flex;gap:var(--s3);align-items:flex-start}
-.diff svg{width:28px;height:28px;flex:none;color:var(--concrete-300)}
+.diff{border:1px solid var(--line-dark);padding:var(--s4);display:flex;gap:var(--s4);align-items:center}
+.diff svg{width:56px;height:56px;flex:none;color:var(--concrete-300);stroke-width:1.3}
 .diff strong{display:block;font-family:var(--font-head);font-weight:600;color:var(--white);line-height:1.3}
 .diff span{display:block;font-size:var(--fs-sm);color:var(--on-dark-muted);margin-top:4px}
-@media (max-width:799px){.step{padding-right:var(--s3)}.step.active{transform:scale(1.02)}}
+@media (max-width:599px){.lm{display:block}}
+@media (max-width:799px){.step{padding-right:var(--s3);padding-left:76px}.step-n{left:22px;top:calc(var(--s4) + 7px)}.step.active{transform:scale(1.02)}}
 @media (min-width:800px){
   .steps{grid-template-columns:repeat(4,1fr)}
   .step{padding:var(--s7) var(--s4) var(--s4) 0;border-top:0;border-bottom:0;border-left:1px solid var(--line-dark);padding-left:var(--s4)}
@@ -695,7 +696,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
     <div class="container">
       <div class="section-head reveal">
         <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>Servicios</span>
-        <h2 id="servicios-title">Ingeniería civil al servicio de la seguridad estructural.</h2>
+        <h2 id="servicios-title"><span class="lm">Ingeniería civil al</span> <span class="lm">servicio de la</span> <span class="lm">seguridad estructural.</span></h2>
         <p>Vamos al origen de cada daño, no solo al síntoma.</p>
       </div>
       <ul class="services">
