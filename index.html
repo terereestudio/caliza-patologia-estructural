@@ -33,7 +33,6 @@
   "description": "Inspección, diagnóstico y evaluación de patologías en estructuras de hormigón. Escaneo 2D de armaduras, detección de humedad y cálculo estructural.",
   "image": "assets/img/og-caliza.jpg",
   "logo": "assets/img/caliza-isotipo.png",
-  "email": "caliza.ingcivil@gmail.com",
   "telephone": ["+5493624205886", "+5493624384988"],
   "sameAs": ["https://www.instagram.com/caliza.patologia"],
   "founder": [
@@ -411,6 +410,13 @@ section{position:relative}
 .form .alt{font-size:var(--fs-sm);color:var(--text-muted);text-align:center}
 .form .alt a{color:var(--navy-700);font-weight:600}
 @media (min-width:960px){.contact-grid{grid-template-columns:1fr 1fr;gap:var(--s8);align-items:start}}
+
+/* --- Formulario: honeypot y consentimiento --- */
+.hp{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:var(--fs-sm);color:var(--text-muted);line-height:1.45;cursor:pointer}
+.consent input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--navy-700)}
+.consent a{color:var(--navy-700);font-weight:600}
+.form-error{font-size:var(--fs-sm);color:#9b2c1f;margin:0}
 
 /* --- CTA intermedio --- */
 .cta-band{margin-top:clamp(48px,6vw,80px);padding-bottom:0!important;display:flex;flex-direction:column;gap:var(--s4);align-items:flex-start;justify-content:space-between;padding-block:clamp(40px,5vw,64px);border-top:3px solid var(--navy-950)}
@@ -818,10 +824,10 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           <p>Te respondemos y coordinamos la inspección.</p>
         </div>
         <ul class="contact-list">
-          <li><a class="js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero hacer una consulta." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span><small>WhatsApp · Matías</small><b>362 420-5886</b></span></a></li>
-          <li><a class="js-wa" href="https://wa.me/5493624384988" data-msg="Hola CALIZA, quiero hacer una consulta." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span><small>WhatsApp · Germán</small><b>362 438-4988</b></span></a></li>
-          <li><a href="mailto:caliza.ingcivil@gmail.com?subject=Consulta%20desde%20la%20web"><svg aria-hidden="true"><use href="#i-mail"/></svg><span><small>Email</small><b>caliza.ingcivil@gmail.com</b></span></a></li>
-          <li><a href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg><span><small>Instagram</small><b>@caliza.patologia</b></span></a></li>
+          <li><a class="js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero hacer una consulta." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg><span><small>WhatsApp · Matías</small><b>362 420-5886</b></span></a></li>
+          <li><a class="js-wa" href="https://wa.me/5493624384988" data-msg="Hola CALIZA, quiero hacer una consulta." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg><span><small>WhatsApp · Germán</small><b>362 438-4988</b></span></a></li>
+          <li><a class="js-mail" href="#contact-form" data-u="caliza.ingcivil" data-d="gmail.com" data-subject="Consulta desde la web"><svg aria-hidden="true"><use href="#i-mail"/></svg><span><small>Email</small><b class="js-mail-text">Escribinos por mail</b></span></a></li>
+          <li><a href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-ig"/></svg><span><small>Instagram</small><b>@caliza.patologia</b></span></a></li>
         </ul>
       </div>
 
@@ -831,11 +837,11 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
         <p class="hint">Completá estos datos y se abrirá WhatsApp con tu mensaje listo para enviar.</p>
         <div class="field">
           <label for="f-name">Nombre</label>
-          <input id="f-name" name="nombre" type="text" autocomplete="name" required>
+          <input id="f-name" name="nombre" type="text" autocomplete="name" required maxlength="60">
         </div>
         <div class="field">
           <label for="f-city">Localidad</label>
-          <input id="f-city" name="localidad" type="text" autocomplete="address-level2">
+          <input id="f-city" name="localidad" type="text" autocomplete="address-level2" maxlength="60">
         </div>
         <div class="field">
           <label for="f-type">Motivo de la consulta</label>
@@ -850,10 +856,20 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
         </div>
         <div class="field">
           <label for="f-msg">Contanos brevemente</label>
-          <textarea id="f-msg" name="mensaje" placeholder="Dónde está el problema, desde cuándo, tipo de construcción…"></textarea>
+          <textarea id="f-msg" name="mensaje" maxlength="600" placeholder="Dónde está el problema, desde cuándo, tipo de construcción…"></textarea>
         </div>
+        <!-- Honeypot anti-bots: debe quedar vacío -->
+        <div class="hp" aria-hidden="true">
+          <label for="f-website">No completar</label>
+          <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <label class="consent">
+          <input type="checkbox" name="consentimiento" required>
+          <span>Acepto la <a href="privacidad.html">Política de Privacidad</a> y que mis datos se usen solo para responder esta consulta.</span>
+        </label>
+        <p class="form-error" id="form-error" role="alert" hidden></p>
         <button class="btn btn-dark" type="submit"><svg aria-hidden="true"><use href="#i-wa"/></svg>Enviar por WhatsApp</button>
-        <p class="alt">¿Preferís mail? Escribinos a <a href="mailto:caliza.ingcivil@gmail.com">caliza.ingcivil@gmail.com</a></p>
+        <p class="alt">¿Preferís mail? Escribinos a <a class="js-mail" href="#contacto" data-u="caliza.ingcivil" data-d="gmail.com"><span class="js-mail-text">nuestro correo</span></a></p>
       </form>
     </div>
   </section>
@@ -867,7 +883,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           <h2 id="ig-title">Seguí nuestro trabajo en Instagram.</h2>
           <p>Inspecciones, casos y novedades en @caliza.patologia.</p>
         </div>
-        <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">
+        <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener noreferrer">
           <svg aria-hidden="true"><use href="#i-ig"/></svg>Seguinos
         </a>
       </div>
@@ -880,7 +896,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
             <img src="assets/img/caliza-isotipo.png" alt="" width="64" height="64" loading="lazy">
             <div><b>@caliza.patologia</b><span>Ingeniería civil · Patología estructural</span></div>
           </div>
-          <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">Ver perfil</a>
+          <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener noreferrer">Ver perfil</a>
         </div>
       </div>
         <button type="button" class="car-btn next" aria-label="Video siguiente"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -906,11 +922,11 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
       <ul class="footer-contact">
         <li><a class="js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero hacer una consulta.">Matías · 362 420-5886</a></li>
         <li><a class="js-wa" href="https://wa.me/5493624384988" data-msg="Hola CALIZA, quiero hacer una consulta.">Germán · 362 438-4988</a></li>
-        <li><a href="mailto:caliza.ingcivil@gmail.com">caliza.ingcivil@gmail.com</a></li>
-        <li><a href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">@caliza.patologia</a></li>
+        <li><a class="js-mail" href="#contacto" data-u="caliza.ingcivil" data-d="gmail.com"><span class="js-mail-text">Email</span></a></li>
+        <li><a href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener noreferrer">@caliza.patologia</a></li>
       </ul>
     </div>
-    <p class="footer-legal">© <span id="year">2026</span> CALIZA Patología Estructural</p>
+    <p class="footer-legal">© <span id="year">2026</span> CALIZA Patología Estructural · <a href="privacidad.html">Política de privacidad</a></p>
   </div>
 </footer>
 
@@ -923,171 +939,10 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
 </div>
 
 <!-- WhatsApp flotante -->
-<a class="wa-float js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero hacer una consulta." aria-label="Escribinos por WhatsApp" target="_blank" rel="noopener">
+<a class="wa-float js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero hacer una consulta." aria-label="Escribinos por WhatsApp" target="_blank" rel="noopener noreferrer">
   <svg aria-hidden="true"><use href="#i-wa"/></svg>
 </a>
 
-<script>
-/* =========================================================
-   JS — menú, header, revelado, WhatsApp
-   ========================================================= */
-(function(){
-  document.documentElement.classList.add('js');
-  // Enlaces de WhatsApp con mensaje prellenado
-  document.querySelectorAll('.js-wa').forEach(function(a){
-    var msg = a.getAttribute('data-msg');
-    if(msg){ a.href = a.href.split('?')[0] + '?text=' + encodeURIComponent(msg); }
-    a.target = '_blank'; a.rel = 'noopener';
-  });
-
-  // Menú mobile
-  var toggle = document.querySelector('.menu-toggle');
-  var nav = document.getElementById('nav');
-  function closeNav(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); toggle.setAttribute('aria-label','Abrir menú'); }
-  toggle.addEventListener('click', function(){
-    var open = nav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-  });
-  nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeNav(); });
-
-  // Borde del header al scrollear
-  var header = document.querySelector('.site-header');
-  function onScroll(){ header.classList.toggle('scrolled', window.scrollY > 8); }
-  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
-
-  // Revelado progresivo
-  var els = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-    }, {rootMargin:'0px 0px -8% 0px', threshold:.08});
-    els.forEach(function(el){ io.observe(el); });
-  } else { els.forEach(function(el){ el.classList.add('in'); }); }
-
-  // Formulario → WhatsApp
-  var form = document.getElementById('contact-form');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var name = form.nombre.value.trim();
-    if(!name){ form.nombre.focus(); form.nombre.setAttribute('aria-invalid','true'); return; }
-    form.nombre.removeAttribute('aria-invalid');
-    var lines = ['Hola CALIZA, soy ' + name + '.'];
-    if(form.localidad.value.trim()) lines.push('Localidad: ' + form.localidad.value.trim());
-    lines.push('Motivo: ' + form.motivo.value);
-    if(form.mensaje.value.trim()) lines.push(form.mensaje.value.trim());
-    var numeros = ['5493624205886','5493624384988']; // Matías, Germán
-    var destino = numeros[Math.random() < .5 ? 0 : 1];
-    window.open('https://wa.me/' + destino + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
-  });
-
-  // Carrusel de servicios (mobile): puntos sincronizados con el scroll
-  var track = document.querySelector('.services'), dots = document.getElementById('services-dots');
-  if(track && dots){
-    var cards = track.children;
-    for(var i=0;i<cards.length;i++){
-      (function(i){
-        var b = document.createElement('button');
-        b.type = 'button'; b.setAttribute('aria-label','Servicio ' + (i+1));
-        b.addEventListener('click', function(){ track.scrollTo({left: cards[i].offsetLeft - track.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), behavior:'smooth'}); });
-        dots.appendChild(b);
-      })(i);
-    }
-    var setDot = function(){
-      var w = cards[0].getBoundingClientRect().width + 16;
-      var idx = Math.min(cards.length - 1, Math.round(track.scrollLeft / w));
-      Array.prototype.forEach.call(dots.children, function(d,j){ d.setAttribute('aria-current', j===idx); });
-    };
-    track.addEventListener('scroll', function(){ window.requestAnimationFrame(setDot); }, {passive:true});
-    setDot();
-  }
-
-  // Nombres sobre la foto: aparece el cartel y se escribe el nombre (máquina de escribir)
-  var photo = document.querySelector('.photo-wrap');
-  if(photo){
-    var tags = photo.querySelectorAll('.name-tag');
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var typeTag = function(tag, delay){
-      var name = tag.querySelector('.ghost').textContent, out = tag.querySelector('.tw');
-      setTimeout(function(){
-        tag.classList.add('on');
-        if(reduced){ out.textContent = name; tag.classList.add('done'); return; }
-        var i = 0;
-        setTimeout(function step(){
-          out.textContent = name.slice(0, ++i);
-          if(i < name.length){ setTimeout(step, 110); } else { setTimeout(function(){ tag.classList.add('done'); }, 600); }
-        }, 380);
-      }, delay);
-    };
-    var go = function(){ Array.prototype.forEach.call(tags, function(t,i){ typeTag(t, i * 900); }); };
-    if('IntersectionObserver' in window){
-      var pio = new IntersectionObserver(function(en){ if(en[0].isIntersecting){ go(); pio.disconnect(); } }, {threshold:.5});
-      pio.observe(photo);
-    } else { go(); }
-  }
-
-  // Pasos: se destacan de a uno, 2,5 s cada uno, mientras la sección está en pantalla
-  var steps = document.querySelectorAll('.step');
-  if(steps.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
-    var cur = -1, timer = null;
-    var next = function(){
-      if(cur >= 0) steps[cur].classList.remove('active');
-      cur = (cur + 1) % steps.length;
-      steps[cur].classList.add('active');
-    };
-    new IntersectionObserver(function(en){
-      if(en[0].isIntersecting){ if(!timer){ next(); timer = setInterval(next, 2500); } }
-      else if(timer){ clearInterval(timer); timer = null; }
-    }, {threshold:.4}).observe(document.querySelector('.steps'));
-  }
-
-  // Carruseles (señales e Instagram): flechas a los costados
-  document.querySelectorAll('[data-carousel]').forEach(function(car){
-    var track = car.querySelector('.car-track'), prev = car.querySelector('.car-btn.prev'), next = car.querySelector('.car-btn.next');
-    var stepW = function(){ var c = track.firstElementChild; return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : track.clientWidth; };
-    var update = function(){
-      prev.disabled = track.scrollLeft < 4;
-      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-    };
-    prev.addEventListener('click', function(){ track.scrollBy({left: -stepW(), behavior:'smooth'}); });
-    next.addEventListener('click', function(){ track.scrollBy({left: stepW(), behavior:'smooth'}); });
-    track.addEventListener('scroll', function(){ window.requestAnimationFrame(update); }, {passive:true});
-    window.addEventListener('resize', update);
-    update(); setTimeout(update, 1500); setTimeout(update, 4000);
-  });
-
-  // Movimiento reducido: congela también las animaciones SVG (SMIL)
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    document.querySelectorAll('.signal-art svg').forEach(function(svg){ if(svg.pauseAnimations) svg.pauseAnimations(); });
-  }
-
-  // Sube el botón de WhatsApp cuando se ve la firma, para no taparla
-  var firma = document.querySelector('.firma-te'), wa = document.querySelector('.wa-float');
-  if('IntersectionObserver' in window && firma && wa){
-    new IntersectionObserver(function(e){ wa.classList.toggle('lift', e[0].isIntersecting); }).observe(firma);
-  }
-
-  /* Instagram: pegá acá los enlaces de posteos o reels (ej. https://www.instagram.com/p/XXXX/ o /reel/XXXX/).
-     Si la lista está vacía se muestra la tarjeta del perfil. */
-  var IG_POSTS = [
-    'https://www.instagram.com/reel/DewqN7RxznD/',
-    'https://www.instagram.com/reel/Dec01E6RCgx/',
-    'https://www.instagram.com/reel/DMRDXH2M5_d/',
-    'https://www.instagram.com/reel/DHcF9FisT8O/',
-    'https://www.instagram.com/reel/DL3RuvtMP4e/'
-  ];
-  if(IG_POSTS.length){
-    var feed = document.getElementById('ig-feed');
-    feed.innerHTML = IG_POSTS.map(function(url){
-      return '<blockquote class="instagram-media" data-instgrm-permalink="' + url + '?utm_source=ig_embed" data-instgrm-version="14"><a href="' + url + '" target="_blank" rel="noopener">Ver en Instagram</a></blockquote>';
-    }).join('');
-    var sc = document.createElement('script'); sc.async = true; sc.src = 'https://www.instagram.com/embed.js';
-    document.body.appendChild(sc);
-  }
-
-  document.getElementById('year').textContent = new Date().getFullYear();
-})();
-</script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
