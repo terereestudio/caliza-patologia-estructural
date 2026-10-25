@@ -157,30 +157,64 @@
     new IntersectionObserver(function(e){ wa.classList.toggle('lift', e[0].isIntersecting); }).observe(firma);
   }
 
-  /* Instagram: pegá acá los enlaces de posteos o reels (ej. https://www.instagram.com/p/XXXX/ o /reel/XXXX/).
-     Si la lista está vacía se muestra la tarjeta del perfil. */
+  /* Instagram: fachada sin rastreo. Cada reel muestra una portada local y recién al tocar
+     "reproducir" se carga el embed de Instagram (conexión con Meta). */
+  var IG_PROFILE = 'https://www.instagram.com/caliza.patologia/';
   var IG_POSTS = [
-    'https://www.instagram.com/reel/DewqN7RxznD/',
-    'https://www.instagram.com/reel/Dec01E6RCgx/',
-    'https://www.instagram.com/reel/DMRDXH2M5_d/',
-    'https://www.instagram.com/reel/DHcF9FisT8O/',
-    'https://www.instagram.com/reel/DL3RuvtMP4e/'
+    { url: 'https://www.instagram.com/reel/DewqN7RxznD/', cover: '' },
+    { url: 'https://www.instagram.com/reel/Dec01E6RCgx/', cover: '' },
+    { url: 'https://www.instagram.com/reel/DMRDXH2M5_d/', cover: 'assets/img/reels/reel-3.jpg' },
+    { url: 'https://www.instagram.com/reel/DHcF9FisT8O/', cover: 'assets/img/reels/reel-4.jpg' },
+    { url: 'https://www.instagram.com/reel/DL3RuvtMP4e/', cover: 'assets/img/reels/reel-5.jpg' }
   ];
-  if(IG_POSTS.length){
-    var feed = document.getElementById('ig-feed');
+  var igScriptLoaded = false;
+  var loadEmbed = function(card, url){
+    while(card.firstChild){ card.removeChild(card.firstChild); }
+    card.classList.add('ig-loaded');
+    var bq = document.createElement('blockquote');
+    bq.className = 'instagram-media';
+    bq.setAttribute('data-instgrm-permalink', url + '?utm_source=ig_embed');
+    bq.setAttribute('data-instgrm-version', '14');
+    var a = document.createElement('a');
+    a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = 'Ver en Instagram';
+    bq.appendChild(a); card.appendChild(bq);
+    if(window.instgrm && window.instgrm.Embeds){ window.instgrm.Embeds.process(); return; }
+    if(!igScriptLoaded){
+      igScriptLoaded = true;
+      var sc = document.createElement('script'); sc.async = true; sc.src = 'https://www.instagram.com/embed.js';
+      sc.referrerPolicy = 'strict-origin-when-cross-origin';
+      document.body.appendChild(sc);
+    }
+  };
+  var el = function(tag, cls, text){ var n = document.createElement(tag); if(cls) n.className = cls; if(text) n.textContent = text; return n; };
+  var extLink = function(href, cls, text){ var a = el('a', cls, text); a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; };
+  var feed = document.getElementById('ig-feed');
+  if(feed && IG_POSTS.length){
     while(feed.firstChild){ feed.removeChild(feed.firstChild); }
-    IG_POSTS.forEach(function(url){
-      if(!/^https:\/\/www\.instagram\.com\/(p|reel)\/[A-Za-z0-9_-]+\/$/.test(url)) return;
-      var bq = document.createElement('blockquote');
-      bq.className = 'instagram-media';
-      bq.setAttribute('data-instgrm-permalink', url + '?utm_source=ig_embed');
-      bq.setAttribute('data-instgrm-version', '14');
-      var a = document.createElement('a');
-      a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = 'Ver en Instagram';
-      bq.appendChild(a); feed.appendChild(bq);
+    IG_POSTS.forEach(function(post, i){
+      if(!/^https:\/\/www\.instagram\.com\/(p|reel)\/[A-Za-z0-9_-]+\/$/.test(post.url)) return;
+      var card = el('article', 'ig-card');
+      var head = el('div', 'ig-head-row');
+      var av = el('img', 'ig-avatar'); av.src = 'assets/img/favicon.png'; av.alt = ''; av.width = 28; av.height = 28;
+      head.appendChild(av); head.appendChild(el('b', null, 'caliza.patologia'));
+      head.appendChild(extLink(IG_PROFILE, 'ig-profile', 'Ver perfil'));
+      var play = el('button', 'ig-play'); play.type = 'button';
+      play.setAttribute('aria-label', 'Reproducir reel ' + (i + 1) + ' (se cargará contenido de Instagram)');
+      if(post.cover){
+        var img = el('img'); img.src = post.cover; img.alt = 'Portada del reel ' + (i + 1) + ' de CALIZA';
+        img.width = 360; img.height = 640; img.loading = 'lazy'; play.appendChild(img);
+      } else {
+        var brand = el('span', 'ig-cover-brand');
+        var logo = el('img'); logo.src = 'assets/img/caliza-isotipo.png'; logo.alt = ''; logo.width = 96; logo.height = 96;
+        brand.appendChild(logo); brand.appendChild(el('span', null, 'Reel de CALIZA')); play.appendChild(brand);
+      }
+      play.appendChild(el('span', 'ig-play-icon'));
+      play.addEventListener('click', function(){ loadEmbed(card, post.url); });
+      var note = el('p', 'ig-note', 'Al reproducir se conecta con Instagram.');
+      var foot = el('div', 'ig-foot'); foot.appendChild(extLink(post.url, null, 'Ver en Instagram'));
+      card.appendChild(head); card.appendChild(play); card.appendChild(note); card.appendChild(foot);
+      feed.appendChild(card);
     });
-    var sc = document.createElement('script'); sc.async = true; sc.src = 'https://www.instagram.com/embed.js'; sc.referrerPolicy = 'strict-origin-when-cross-origin';
-    document.body.appendChild(sc);
   }
 
   document.getElementById('year').textContent = new Date().getFullYear();
