@@ -80,7 +80,7 @@
   --fs-lg:clamp(1.12rem,1.05rem + .35vw,1.3rem);
   --fs-h3:clamp(1.15rem,1.08rem + .35vw,1.35rem);
   --fs-h2:clamp(1.75rem,1.4rem + 1.6vw,2.7rem);
-  --fs-h1:clamp(2.2rem,1.6rem + 3vw,4.1rem);
+  --fs-h1:clamp(2rem,1.5rem + 2.2vw,3.3rem);
 
   /* Espaciado (base 8) */
   --s1:4px;--s2:8px;--s3:16px;--s4:24px;--s5:32px;--s6:48px;--s7:64px;--s8:96px;--s9:128px;
@@ -176,7 +176,8 @@ p{margin:0}
   background-size:48px 48px;opacity:.35;
   -webkit-mask-image:radial-gradient(ellipse at 75% 40%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 75% 40%,#000 0%,transparent 70%)}
 .hero-grid{position:relative;display:grid;gap:var(--s6);align-items:center}
-.hero h1{font-size:var(--fs-h1);font-weight:700;color:var(--white);margin-top:var(--s4);max-width:14ch}
+.hero h1{font-size:var(--fs-h1);font-weight:700;color:var(--white);margin-top:var(--s4)}
+@media (min-width:600px){.hero h1 .l{display:block;white-space:nowrap}}
 .hero .lead{font-size:var(--fs-lg);color:var(--on-dark-muted);margin-top:var(--s4);max-width:52ch}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--s5)}
 @media (min-width:600px){.hero-ctas{flex-wrap:nowrap}.hero-ctas .btn{padding:0 20px;white-space:nowrap}}
@@ -245,14 +246,53 @@ section{position:relative}
 .dark .section-head p{color:var(--on-dark-muted)}
 
 /* --- Señales --- */
-.signals{display:grid;gap:1px;background:var(--line-light);border:1px solid var(--line-light);list-style:none;padding:0;margin:0}
-.signals li{background:var(--stone-100);padding:var(--s4);display:flex;gap:var(--s3);align-items:flex-start}
-.signals svg{width:26px;height:26px;flex:none;color:var(--navy-700);margin-top:2px}
-.signals strong{display:block;font-family:var(--font-head);font-weight:600;color:var(--navy-950);font-size:var(--fs-base);line-height:1.3}
-.signals span{display:block;color:var(--text-muted);font-size:var(--fs-sm);margin-top:4px}
+.signal{background:var(--white);border:1px solid var(--line-light);display:flex;flex-direction:column}
+.signal-art{background:var(--navy-950);aspect-ratio:240/140;display:block}
+.signal-art svg{width:100%;height:100%;display:block}
+.signal-body{padding:var(--s4)}
+.signal strong{display:block;font-family:var(--font-head);font-weight:600;color:var(--navy-950);font-size:var(--fs-h3);line-height:1.25}
+.signal span{display:block;color:var(--text-muted);font-size:var(--fs-sm);margin-top:6px}
 .signals-note{margin-top:var(--s5);font-family:var(--font-head);font-weight:600;font-size:var(--fs-lg);color:var(--navy-950);max-width:46ch;padding-left:var(--s3);border-left:3px solid var(--navy-950)}
-@media (min-width:640px){.signals{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1000px){.signals{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:900px){.signals-note{max-width:none;white-space:nowrap;font-size:clamp(1rem,.55rem + .85vw,1.3rem)}}
+
+/* animaciones de las ilustraciones */
+.sg-crack{stroke-dasharray:140;stroke-dashoffset:0;animation:sgCrack 4.5s ease-in-out infinite}
+.sg-crack.d2{animation-delay:.9s}
+@keyframes sgCrack{0%{stroke-dashoffset:140;opacity:1}40%,82%{stroke-dashoffset:0;opacity:1}96%,100%{stroke-dashoffset:0;opacity:0}}
+.sg-blink{animation:sgBlink 1.4s steps(1) infinite}
+@keyframes sgBlink{50%{opacity:.15}}
+.sg-rust{transform-box:fill-box;transform-origin:center;animation:sgRust 3s ease-in-out infinite}
+.sg-rust.d2{animation-delay:.7s}.sg-rust.d3{animation-delay:1.4s}
+@keyframes sgRust{0%,100%{transform:scale(.6);opacity:.55}50%{transform:scale(1.15);opacity:1}}
+.sg-fall{transform-box:fill-box;transform-origin:center;animation:sgFall 3.2s ease-in infinite}
+@keyframes sgFall{0%,35%{transform:translate(0,0) rotate(0);opacity:1}85%{transform:translate(6px,46px) rotate(40deg);opacity:1}100%{transform:translate(6px,46px) rotate(40deg);opacity:0}}
+.sg-drop{animation:sgDrop 1.8s cubic-bezier(.55,0,1,.45) infinite}
+.sg-drop.d2{animation-delay:.6s}.sg-drop.d3{animation-delay:1.2s}
+@keyframes sgDrop{0%{transform:translateY(0);opacity:0}10%{opacity:1}85%{transform:translateY(66px);opacity:1}100%{transform:translateY(70px);opacity:0}}
+.sg-pool{transform-box:fill-box;transform-origin:center;animation:sgPool 1.8s ease-out infinite}
+@keyframes sgPool{0%,70%{transform:scale(.85)}85%{transform:scale(1.08)}100%{transform:scale(.85)}}
+.sg-stack{animation:sgStack 4s cubic-bezier(.3,0,.2,1) infinite}
+@keyframes sgStack{0%{transform:translateY(-40px);opacity:0}15%{opacity:1}38%{transform:translateY(0)}42%{transform:translateY(-3px)}46%,84%{transform:translateY(0);opacity:1}100%{transform:translateY(0);opacity:0}}
+.sg-scan{animation:sgScan 4s ease-in-out infinite alternate}
+@keyframes sgScan{0%{transform:translate(-38px,-14px)}50%{transform:translate(10px,14px)}100%{transform:translate(40px,-6px)}}
+
+/* --- Carrusel genérico (señales e Instagram) --- */
+.carousel{position:relative}
+.car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:var(--s4);scrollbar-width:none;list-style:none;margin:0;padding:4px 0 8px;align-items:stretch}
+.car-track::-webkit-scrollbar{display:none}
+.car-track > *{flex:0 0 calc((100% - 2 * var(--s4)) / 3);scroll-snap-align:start;min-width:0}
+.car-btn{position:absolute;top:50%;z-index:3;width:48px;height:48px;border-radius:50%;border:0;background:var(--navy-950);color:var(--white);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 24px -10px rgba(6,19,35,.6);transform:translateY(-50%);transition:opacity .2s,background .2s}
+.car-btn:hover{background:var(--slate-600)}
+.car-btn:disabled{opacity:0;pointer-events:none}
+.car-btn svg{width:20px;height:20px}
+.car-btn.prev{left:-24px}.car-btn.prev svg{transform:rotate(180deg)}
+.car-btn.next{right:-24px}
+@media (max-width:899px){.car-track > *{flex-basis:calc((100% - var(--s4)) / 2)}}
+@media (max-width:699px){
+  .car-track{gap:var(--s3);margin-inline:calc(var(--gutter) * -1);padding:4px var(--gutter) 8px;scroll-padding-inline:var(--gutter)}
+  .car-track > *{flex-basis:84%}
+  .car-btn{display:none}
+}
 
 /* --- Servicios --- */
 .services{display:grid;gap:var(--s4);list-style:none;padding:0;margin:0}
@@ -314,7 +354,7 @@ section{position:relative}
 .team{display:grid;gap:var(--s5);align-items:start}
 .team-photo{position:relative;margin:0}
 .team-photo img{width:100%;aspect-ratio:1080/851;object-fit:cover;filter:grayscale(.15) contrast(1.03)}
-.team-photo::after{ /* esquina estructural sobre la foto */
+.photo-wrap::after{ /* esquina estructural sobre la foto */
   content:"";position:absolute;right:-12px;top:-12px;width:38%;height:45%;border-top:3px solid var(--navy-950);border-right:3px solid var(--navy-950);pointer-events:none}
 .photo-wrap{position:relative}
 .name-tag{position:absolute;left:var(--x);top:var(--y);transform:translateX(-50%);background:var(--white);color:var(--navy-950);font-family:var(--font-head);font-weight:700;font-size:clamp(.72rem,.65rem + .35vw,.9rem);letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;white-space:nowrap;box-shadow:0 6px 16px -8px rgba(0,0,0,.5)}
@@ -335,6 +375,7 @@ section{position:relative}
 .partners b{font-family:var(--font-head);font-size:var(--fs-h3);color:var(--navy-950);font-weight:600}
 .partners span{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
 @media (min-width:900px){.team{grid-template-columns:1.15fr 1fr;gap:var(--s6)}.team-photo{margin-top:6px}}
+.team-photo .partners{margin-top:var(--s4)}
 #equipo{padding-block:clamp(56px,6vw,96px)}
 
 /* --- FAQ --- */
@@ -392,25 +433,11 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
 @media (min-width:800px){.footer-inner{grid-template-columns:auto 1fr auto}.footer-inner nav{justify-content:center}.footer-contact{text-align:right}}
 
 /* --- Instagram --- */
-.ig-head{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:flex-end;justify-content:space-between;margin-bottom:clamp(32px,4vw,48px)}
+.ig-head{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center;justify-content:space-between;margin-bottom:clamp(32px,4vw,48px)}
 .ig-head .section-head{margin-bottom:0}
-.ig-feed{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:var(--s4);align-items:flex-start;scrollbar-width:none;padding-bottom:4px}
-.ig-feed::-webkit-scrollbar{display:none}
-.ig-feed > *{flex:0 0 calc((100% - 2 * var(--s4)) / 3)!important;min-width:0!important;scroll-snap-align:start}
+.ig-feed > *{min-width:0!important}
 .ig-feed .instagram-media{max-width:none!important;margin:0!important;border:1px solid var(--line-light)!important;border-radius:2px!important;box-shadow:none!important}
 .ig-feed .ig-empty{flex-basis:100%!important}
-.ig-nav{display:flex;gap:8px}
-.ig-nav button{width:52px;height:52px;border:1.5px solid var(--navy-950);background:transparent;color:var(--navy-950);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
-.ig-nav button:hover{background:var(--navy-950);color:var(--white)}
-.ig-nav button:disabled{opacity:.3;cursor:default;background:transparent;color:var(--navy-950)}
-.ig-nav svg{width:20px;height:20px}
-.ig-actions{display:flex;gap:12px;align-items:center}
-@media (max-width:899px){.ig-feed > *{flex-basis:calc((100% - var(--s4)) / 2)!important}}
-@media (max-width:699px){
-  .ig-feed{gap:var(--s3);margin-inline:calc(var(--gutter) * -1);padding:4px var(--gutter) 8px;scroll-padding-inline:var(--gutter)}
-  .ig-feed > *{flex-basis:86%!important}
-  .ig-nav{display:none}
-}
 .ig-hint{display:none;margin-top:var(--s3);font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);text-align:center}
 @media (max-width:699px){.ig-hint{display:block}}
 .ig-empty{border:1px solid var(--line-light);background:var(--white);padding:clamp(24px,4vw,40px);display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center;justify-content:space-between}
@@ -532,7 +559,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
     <div class="container hero-grid">
       <div>
         <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>Ingeniería civil · Patología estructural</span>
-        <h1 id="hero-title">Diagnóstico preciso para estructuras de hormigón.</h1>
+        <h1 id="hero-title"><span class="l">Diagnóstico preciso</span> <span class="l">para estructuras</span> <span class="l">de hormigón.</span></h1>
         <p class="lead">Detectamos fisuras, corrosión y otras patologías con tecnología no destructiva, y te proponemos la solución adecuada para cada caso.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero solicitar una inspección estructural.">
@@ -645,14 +672,19 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
         <h2 id="senales-title">Señales que no conviene dejar pasar.</h2>
         <p>Muchas patologías avanzan en silencio. Estos son los casos en los que una inspección profesional marca la diferencia.</p>
       </div>
-      <ul class="signals reveal">
-        <li><svg aria-hidden="true"><use href="#i-crack"/></svg><div><strong>Fisuras o grietas</strong><span>En vigas, columnas, losas o muros, sobre todo si crecen con el tiempo.</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-rust"/></svg><div><strong>Óxido o armaduras expuestas</strong><span>Desprendimiento del recubrimiento y manchas de corrosión.</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-drop"/></svg><div><strong>Humedad persistente</strong><span>Manchas, filtraciones o pérdidas que no encuentran su origen.</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-deform"/></svg><div><strong>Deformaciones</strong><span>Losas o vigas que flexan, pisos desnivelados, aberturas que se traban.</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-build"/></svg><div><strong>Reformas y ampliaciones</strong><span>Antes de sumar un piso, abrir un vano o agregar cargas.</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-key"/></svg><div><strong>Compra de un inmueble</strong><span>Para conocer el estado real de la estructura antes de decidir.</span></div></li>
-      </ul>
+      <div class="carousel reveal" data-carousel>
+        <button type="button" class="car-btn prev" aria-label="Anterior"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <ul class="car-track signals">
+          <li class="signal"><div class="signal-art" aria-hidden="true"><svg viewBox="0 0 240 140" fill="none"><rect x="40" y="14" width="160" height="112" fill="#1b2633" stroke="#818d8d" stroke-width="1.5"/><path d="M40 52h160M40 90h160" stroke="#ffffff" stroke-opacity=".06"/><path class="sg-crack" d="M118 14L126 34L114 50L130 70L120 86L136 104L128 126" stroke="#e8a93c" stroke-width="2.5" stroke-linejoin="bevel"/><path class="sg-crack d2" d="M130 70L150 78L158 96" stroke="#e8a93c" stroke-width="2" stroke-linejoin="bevel"/><g class="sg-blink" stroke="#ffffff" stroke-width="2"><circle cx="128" cy="70" r="11"/><path d="M128 52v36M110 70h36"/></g></svg></div><div class="signal-body"><strong>Fisuras o grietas</strong><span>En vigas, columnas, losas o muros, sobre todo si crecen con el tiempo.</span></div></li>
+          <li class="signal"><div class="signal-art" aria-hidden="true"><svg viewBox="0 0 240 140" fill="none"><rect x="30" y="30" width="180" height="64" fill="#1b2633" stroke="#818d8d" stroke-width="1.5"/><path d="M88 54L112 46L142 50L158 58L152 82L120 86L94 80Z" fill="#0b141e"/><rect x="30" y="62" width="180" height="8" fill="#8d979f"/><path d="M42 62v8M54 62v8M66 62v8M78 62v8M90 62v8M102 62v8M114 62v8M126 62v8M138 62v8M150 62v8M162 62v8M174 62v8M186 62v8M198 62v8" stroke="#5e6870" stroke-width="2"/><ellipse class="sg-rust" cx="112" cy="66" rx="12" ry="7" fill="#b4612f"/><ellipse class="sg-rust d2" cx="138" cy="66" rx="9" ry="6" fill="#b4612f"/><ellipse class="sg-rust d3" cx="98" cy="67" rx="5" ry="4" fill="#b4612f"/><path class="sg-fall" d="M112 84L126 86L122 96L108 94Z" fill="#818d8d"/><path d="M30 118h180" stroke="#ffffff" stroke-opacity=".15" stroke-dasharray="4 5"/></svg></div><div class="signal-body"><strong>Óxido o armaduras expuestas</strong><span>Desprendimiento del recubrimiento y manchas de corrosión.</span></div></li>
+          <li class="signal"><div class="signal-art" aria-hidden="true"><svg viewBox="0 0 240 140" fill="none"><path d="M20 30h88l4 6-3 4 3 4H20Z" fill="#5e6870"/><path d="M220 30h-88l-3 5 4 4-3 5h90Z" fill="#5e6870"/><path d="M20 30h88M20 44h90M220 30h-88M220 44h-90" stroke="#8d979f" stroke-width="1.5"/><rect x="40" y="26" width="6" height="22" fill="#8d979f"/><rect x="194" y="26" width="6" height="22" fill="#8d979f"/><g transform="translate(120 50)" fill="#7fb0d6"><path class="sg-drop" d="M0-6C3-1 5 2 5 5A5 5 0 0 1-5 5C-5 2-3-1 0-6Z"/><path class="sg-drop d2" d="M0-6C3-1 5 2 5 5A5 5 0 0 1-5 5C-5 2-3-1 0-6Z"/><path class="sg-drop d3" d="M0-6C3-1 5 2 5 5A5 5 0 0 1-5 5C-5 2-3-1 0-6Z"/></g><ellipse class="sg-pool" cx="120" cy="124" rx="38" ry="6" fill="#7fb0d6" fill-opacity=".35"/><path d="M20 130h200" stroke="#818d8d" stroke-width="1.5"/></svg></div><div class="signal-body"><strong>Humedad y filtraciones</strong><span>Manchas, goteras o pérdidas de caños que no encuentran su origen.</span></div></li>
+          <li class="signal"><div class="signal-art" aria-hidden="true"><svg viewBox="0 0 240 140" fill="none"><path d="M40 40H200" stroke="#ffffff" stroke-opacity=".35" stroke-dasharray="4 5"/><rect x="40" y="40" width="14" height="88" fill="#2a3542" stroke="#818d8d" stroke-width="1.5"/><rect x="186" y="40" width="14" height="88" fill="#2a3542" stroke="#818d8d" stroke-width="1.5"/><path d="M40 40Q120 40 200 40V54Q120 54 40 54Z" fill="#818d8d" fill-opacity=".35" stroke="#d6dbdb" stroke-width="1.5"><animate attributeName="d" dur="4s" repeatCount="indefinite" keyTimes="0;.45;.8;1" values="M40 40Q120 40 200 40V54Q120 54 40 54Z;M40 40Q120 72 200 40V54Q120 86 40 54Z;M40 40Q120 72 200 40V54Q120 86 40 54Z;M40 40Q120 40 200 40V54Q120 54 40 54Z"/></path><g class="sg-blink" stroke="#e8a93c" stroke-width="2.5"><path d="M120 6v22M112 20l8 8 8-8"/></g><path d="M20 128h200" stroke="#818d8d" stroke-width="1.5"/></svg></div><div class="signal-body"><strong>Deformaciones</strong><span>Losas o vigas que flexan, pisos desnivelados, aberturas que se traban.</span></div></li>
+          <li class="signal"><div class="signal-art" aria-hidden="true"><svg viewBox="0 0 240 140" fill="none"><path d="M20 128h200" stroke="#818d8d" stroke-width="1.5"/><rect x="80" y="72" width="80" height="56" fill="#1b2633" stroke="#818d8d" stroke-width="1.5"/><path d="M80 100h80" stroke="#818d8d"/><g fill="#3a4653"><rect x="92" y="80" width="14" height="12"/><rect x="134" y="80" width="14" height="12"/><rect x="92" y="108" width="14" height="12"/><rect x="113" y="108" width="14" height="20"/><rect x="134" y="108" width="14" height="12"/></g><g class="sg-stack"><rect x="80" y="44" width="80" height="28" fill="#e8a93c" fill-opacity=".12" stroke="#e8a93c" stroke-width="1.5" stroke-dasharray="5 4"/><path d="M100 18v16M94 28l6 6 6-6M140 18v16M134 28l6 6 6-6" stroke="#e8a93c" stroke-width="2"/></g></svg></div><div class="signal-body"><strong>Reformas y ampliaciones</strong><span>Antes de sumar un piso, abrir un vano o agregar cargas.</span></div></li>
+          <li class="signal"><div class="signal-art" aria-hidden="true"><svg viewBox="0 0 240 140" fill="none"><path d="M60 70L120 28L180 70" stroke="#d6dbdb" stroke-width="2" stroke-linejoin="bevel"/><rect x="72" y="66" width="96" height="62" fill="#1b2633" stroke="#818d8d" stroke-width="1.5"/><rect x="88" y="80" width="18" height="16" fill="#3a4653"/><rect x="134" y="80" width="18" height="16" fill="#3a4653"/><rect x="112" y="100" width="16" height="28" fill="#3a4653"/><path d="M20 128h200" stroke="#818d8d" stroke-width="1.5"/><g transform="translate(120 84)"><g class="sg-scan" stroke="#ffffff" stroke-width="2"><circle r="13"/><path d="M0-20v40M-20 0h40"/></g></g></svg></div><div class="signal-body"><strong>Compra de un inmueble</strong><span>Para conocer el estado real de la estructura antes de decidir.</span></div></li>
+        </ul>
+        <button type="button" class="car-btn next" aria-label="Siguiente"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+      <p class="ig-hint" aria-hidden="true">Deslizá para ver más →</p>
       <p class="signals-note reveal">Un diagnóstico a tiempo evita reparaciones mayores y, sobre todo, riesgos.</p>
     </div>
   </section>
@@ -745,15 +777,15 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           <span class="name-tag" style="--x:18%;--y:84%" aria-hidden="true"><span class="ghost">Germán</span><span class="tw"></span></span>
           <span class="name-tag" style="--x:84%;--y:84%" aria-hidden="true"><span class="ghost">Matías</span><span class="tw"></span></span>
         </div>
+          <ul class="partners">
+            <li><b>Germán <span class="todo">[COMPLETAR: apellido]</span></b><span>Ingeniero civil · Mat. <span class="todo">[COMPLETAR]</span></span></li>
+            <li><b>Matías <span class="todo">[COMPLETAR: apellido]</span></b><span>Ingeniero civil · Mat. <span class="todo">[COMPLETAR]</span></span></li>
+          </ul>
       </figure>
       <div class="team-copy reveal">
         <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>04 — Quiénes somos</span>
         <h2 id="equipo-title">Somos Matías y Germán, y juntos creamos CALIZA.</h2>
         <p>Somos <strong>ingenieros civiles</strong> con experiencia en cálculo estructural, inspección y análisis de patologías en estructuras de hormigón. Nos especializamos en detectar fallas a tiempo y en ofrecer soluciones que garanticen la <strong>seguridad y durabilidad</strong> de cada construcción.</p>
-        <ul class="partners">
-          <li><b>Germán <span class="todo">[COMPLETAR: apellido]</span></b><span>Ingeniero civil · Mat. <span class="todo">[COMPLETAR]</span></span></li>
-          <li><b>Matías <span class="todo">[COMPLETAR: apellido]</span></b><span>Ingeniero civil · Mat. <span class="todo">[COMPLETAR]</span></span></li>
-        </ul>
       </div>
     </div>
   </section>
@@ -841,18 +873,14 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           <h2 id="ig-title">Seguí nuestro trabajo en Instagram.</h2>
           <p>Inspecciones, casos y novedades en @caliza.patologia.</p>
         </div>
-        <div class="ig-actions">
-          <div class="ig-nav">
-            <button type="button" id="ig-prev" aria-label="Video anterior"><svg aria-hidden="true" style="transform:rotate(180deg)"><use href="#i-arrow"/></svg></button>
-            <button type="button" id="ig-next" aria-label="Video siguiente"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-          </div>
-          <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">
-            <svg aria-hidden="true"><use href="#i-ig"/></svg>Seguinos
-          </a>
-        </div>
+        <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-ig"/></svg>Seguinos
+        </a>
       </div>
       <!-- Se completa con los enlaces de IG_POSTS (ver script al final) -->
-      <div class="ig-feed reveal" id="ig-feed">
+      <div class="carousel reveal" data-carousel>
+        <button type="button" class="car-btn prev" aria-label="Video anterior"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <div class="car-track ig-feed" id="ig-feed">
         <div class="ig-empty">
           <div class="handle">
             <img src="assets/img/caliza-isotipo.png" alt="" width="64" height="64" loading="lazy">
@@ -860,6 +888,8 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           </div>
           <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">Ver perfil</a>
         </div>
+      </div>
+        <button type="button" class="car-btn next" aria-label="Video siguiente"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
       </div>
       <p class="ig-hint" aria-hidden="true">Deslizá para ver más →</p>
     </div>
@@ -1018,19 +1048,24 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
     }, {threshold:.4}).observe(document.querySelector('.steps'));
   }
 
-  // Instagram: flechas del carrusel
-  var igFeed = document.getElementById('ig-feed'), igPrev = document.getElementById('ig-prev'), igNext = document.getElementById('ig-next');
-  if(igFeed && igPrev && igNext){
-    var igStep = function(){ var c = igFeed.firstElementChild; return c ? c.getBoundingClientRect().width + 24 : igFeed.clientWidth; };
-    var igUpdate = function(){
-      igPrev.disabled = igFeed.scrollLeft < 4;
-      igNext.disabled = igFeed.scrollLeft + igFeed.clientWidth >= igFeed.scrollWidth - 4;
+  // Carruseles (señales e Instagram): flechas a los costados
+  document.querySelectorAll('[data-carousel]').forEach(function(car){
+    var track = car.querySelector('.car-track'), prev = car.querySelector('.car-btn.prev'), next = car.querySelector('.car-btn.next');
+    var stepW = function(){ var c = track.firstElementChild; return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : track.clientWidth; };
+    var update = function(){
+      prev.disabled = track.scrollLeft < 4;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
     };
-    igPrev.addEventListener('click', function(){ igFeed.scrollBy({left: -igStep(), behavior:'smooth'}); });
-    igNext.addEventListener('click', function(){ igFeed.scrollBy({left: igStep(), behavior:'smooth'}); });
-    igFeed.addEventListener('scroll', function(){ window.requestAnimationFrame(igUpdate); }, {passive:true});
-    window.addEventListener('resize', igUpdate);
-    setTimeout(igUpdate, 300); setTimeout(igUpdate, 3000);
+    prev.addEventListener('click', function(){ track.scrollBy({left: -stepW(), behavior:'smooth'}); });
+    next.addEventListener('click', function(){ track.scrollBy({left: stepW(), behavior:'smooth'}); });
+    track.addEventListener('scroll', function(){ window.requestAnimationFrame(update); }, {passive:true});
+    window.addEventListener('resize', update);
+    update(); setTimeout(update, 1500); setTimeout(update, 4000);
+  });
+
+  // Movimiento reducido: congela también las animaciones SVG (SMIL)
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.signal-art svg').forEach(function(svg){ if(svg.pauseAnimations) svg.pauseAnimations(); });
   }
 
   // Sube el botón de WhatsApp cuando se ve la firma, para no taparla
