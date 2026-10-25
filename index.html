@@ -169,7 +169,7 @@ p{margin:0}
    5. HERO
    ========================================================= */
 .dark{background:var(--navy-950);color:var(--on-dark)}
-.hero{position:relative;padding-top:calc(var(--header-h) + clamp(40px,7vw,96px));padding-bottom:clamp(80px,10vw,140px);overflow:hidden}
+.hero{position:relative;padding-top:calc(var(--header-h) + clamp(32px,5vw,64px));padding-bottom:clamp(64px,7vw,100px);overflow:hidden}
 .hero::before{ /* grilla de relevamiento */
   content:"";position:absolute;inset:0;pointer-events:none;
   background-image:linear-gradient(var(--line-dark) 1px,transparent 1px),linear-gradient(90deg,var(--line-dark) 1px,transparent 1px);
@@ -178,8 +178,9 @@ p{margin:0}
 .hero-grid{position:relative;display:grid;gap:var(--s6);align-items:center}
 .hero h1{font-size:var(--fs-h1);font-weight:700;color:var(--white);margin-top:var(--s4);max-width:14ch}
 .hero .lead{font-size:var(--fs-lg);color:var(--on-dark-muted);margin-top:var(--s4);max-width:52ch}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s5)}
-.hero-facts{list-style:none;padding:0;margin:var(--s6) 0 0;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:var(--s3) var(--s5);border-top:1px solid var(--line-dark);padding-top:var(--s4)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--s5)}
+@media (min-width:600px){.hero-ctas{flex-wrap:nowrap}.hero-ctas .btn{padding:0 20px;white-space:nowrap}}
+.hero-facts{list-style:none;padding:0;margin:var(--s5) 0 0;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:var(--s3) var(--s5);border-top:1px solid var(--line-dark);padding-top:var(--s4)}
 .hero-facts li{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-muted);display:flex;align-items:center;gap:8px}
 .hero-facts li::before{content:"";width:6px;height:6px;border:1.5px solid var(--concrete-300);flex:none}
 .hero-visual{width:100%;max-width:520px;justify-self:center}
@@ -191,7 +192,7 @@ p{margin:0}
   .hero-ctas .btn{width:100%}
 }
 @media (min-width:960px){
-  .hero-grid{grid-template-columns:1.1fr .9fr}
+  .hero-grid{grid-template-columns:1.25fr .75fr}
   .hero-visual{justify-self:end}
 }
 
@@ -283,11 +284,14 @@ section{position:relative}
 .carousel-dots button[aria-current="true"]::before{background:var(--navy-700);width:20px}
 @media (min-width:700px){.carousel-dots{display:none}}
 @media (min-width:700px){.services{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1080px){.services{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:900px){.services{grid-template-columns:repeat(3,1fr)}}
 
 /* --- Método --- */
 .steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:step}
-.step{position:relative;padding:var(--s4) 0 var(--s4) 64px;border-top:1px solid var(--line-dark)}
+.step{position:relative;padding:var(--s4) 0 var(--s4) 64px;border-top:1px solid var(--line-dark);transition:background .5s ease,transform .5s ease,box-shadow .5s ease}
+.step.active{background:rgba(255,255,255,.07);transform:scale(1.04);box-shadow:inset 0 3px 0 var(--white),0 20px 40px -24px rgba(0,0,0,.7);z-index:1}
+.step.active .step-n{color:var(--white)}
+.step.active p{color:var(--on-dark)}
 .step:last-child{border-bottom:1px solid var(--line-dark)}
 .step-n{position:absolute;left:0;top:var(--s4);font-family:var(--font-mono);font-size:var(--fs-sm);color:var(--concrete-300);letter-spacing:.1em}
 .step h3{font-size:var(--fs-h3);font-weight:600;color:var(--white)}
@@ -297,6 +301,7 @@ section{position:relative}
 .diff svg{width:28px;height:28px;flex:none;color:var(--concrete-300)}
 .diff strong{display:block;font-family:var(--font-head);font-weight:600;color:var(--white);line-height:1.3}
 .diff span{display:block;font-size:var(--fs-sm);color:var(--on-dark-muted);margin-top:4px}
+@media (max-width:799px){.step{padding-right:var(--s3)}.step.active{transform:scale(1.02)}}
 @media (min-width:800px){
   .steps{grid-template-columns:repeat(4,1fr)}
   .step{padding:var(--s7) var(--s4) var(--s4) 0;border-top:0;border-bottom:0;border-left:1px solid var(--line-dark);padding-left:var(--s4)}
@@ -306,7 +311,7 @@ section{position:relative}
 }
 
 /* --- Equipo --- */
-.team{display:grid;gap:var(--s6);align-items:center}
+.team{display:grid;gap:var(--s5);align-items:start}
 .team-photo{position:relative;margin:0}
 .team-photo img{width:100%;aspect-ratio:1080/851;object-fit:cover;filter:grayscale(.15) contrast(1.03)}
 .team-photo::after{ /* esquina estructural sobre la foto */
@@ -325,11 +330,12 @@ section{position:relative}
 .team-copy h2{font-size:var(--fs-h2);color:var(--navy-950);margin-top:var(--s3)}
 .team-copy p{margin-top:var(--s4);color:var(--text-muted);font-size:var(--fs-lg);max-width:54ch}
 .team-copy p strong{color:var(--navy-950);font-weight:600}
-.partners{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;gap:var(--s3)}
-.partners li{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);flex-wrap:wrap;border-top:1px solid var(--line-light);padding-top:var(--s3)}
+.partners{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
+.partners li{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line-light);padding-top:var(--s3)}
 .partners b{font-family:var(--font-head);font-size:var(--fs-h3);color:var(--navy-950);font-weight:600}
 .partners span{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
-@media (min-width:960px){.team{grid-template-columns:1fr 1fr;gap:var(--s8)}}
+@media (min-width:900px){.team{grid-template-columns:1.15fr 1fr;gap:var(--s6)}.team-photo{margin-top:6px}}
+#equipo{padding-block:clamp(56px,6vw,96px)}
 
 /* --- FAQ --- */
 .faq{max-width:820px}
@@ -388,13 +394,22 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
 /* --- Instagram --- */
 .ig-head{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:flex-end;justify-content:space-between;margin-bottom:clamp(32px,4vw,48px)}
 .ig-head .section-head{margin-bottom:0}
-.ig-feed{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));align-items:start}
-.ig-feed .instagram-media{min-width:0!important;width:100%!important;margin:0!important;border:1px solid var(--line-light)!important;border-radius:2px!important;box-shadow:none!important}
+.ig-feed{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:var(--s4);align-items:flex-start;scrollbar-width:none;padding-bottom:4px}
+.ig-feed::-webkit-scrollbar{display:none}
+.ig-feed > *{flex:0 0 calc((100% - 2 * var(--s4)) / 3)!important;min-width:0!important;scroll-snap-align:start}
+.ig-feed .instagram-media{max-width:none!important;margin:0!important;border:1px solid var(--line-light)!important;border-radius:2px!important;box-shadow:none!important}
+.ig-feed .ig-empty{flex-basis:100%!important}
+.ig-nav{display:flex;gap:8px}
+.ig-nav button{width:52px;height:52px;border:1.5px solid var(--navy-950);background:transparent;color:var(--navy-950);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.ig-nav button:hover{background:var(--navy-950);color:var(--white)}
+.ig-nav button:disabled{opacity:.3;cursor:default;background:transparent;color:var(--navy-950)}
+.ig-nav svg{width:20px;height:20px}
+.ig-actions{display:flex;gap:12px;align-items:center}
+@media (max-width:899px){.ig-feed > *{flex-basis:calc((100% - var(--s4)) / 2)!important}}
 @media (max-width:699px){
-  .ig-feed{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:var(--s3);margin-inline:calc(var(--gutter) * -1);padding:4px var(--gutter) 8px;scroll-padding-inline:var(--gutter);scrollbar-width:none}
-  .ig-feed::-webkit-scrollbar{display:none}
-  .ig-feed > *{flex:0 0 86%;scroll-snap-align:start}
-  .ig-feed .ig-empty{flex-basis:100%}
+  .ig-feed{gap:var(--s3);margin-inline:calc(var(--gutter) * -1);padding:4px var(--gutter) 8px;scroll-padding-inline:var(--gutter)}
+  .ig-feed > *{flex-basis:86%!important}
+  .ig-nav{display:none}
 }
 .ig-hint{display:none;margin-top:var(--s3);font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);text-align:center}
 @media (max-width:699px){.ig-hint{display:block}}
@@ -826,9 +841,15 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           <h2 id="ig-title">Seguí nuestro trabajo en Instagram.</h2>
           <p>Inspecciones, casos y novedades en @caliza.patologia.</p>
         </div>
-        <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">
-          <svg aria-hidden="true"><use href="#i-ig"/></svg>Seguinos
-        </a>
+        <div class="ig-actions">
+          <div class="ig-nav">
+            <button type="button" id="ig-prev" aria-label="Video anterior"><svg aria-hidden="true" style="transform:rotate(180deg)"><use href="#i-arrow"/></svg></button>
+            <button type="button" id="ig-next" aria-label="Video siguiente"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          </div>
+          <a class="btn btn-dark" href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-ig"/></svg>Seguinos
+          </a>
+        </div>
       </div>
       <!-- Se completa con los enlaces de IG_POSTS (ver script al final) -->
       <div class="ig-feed reveal" id="ig-feed">
@@ -980,6 +1001,36 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
       var pio = new IntersectionObserver(function(en){ if(en[0].isIntersecting){ go(); pio.disconnect(); } }, {threshold:.5});
       pio.observe(photo);
     } else { go(); }
+  }
+
+  // Pasos: se destacan de a uno, 2,5 s cada uno, mientras la sección está en pantalla
+  var steps = document.querySelectorAll('.step');
+  if(steps.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+    var cur = -1, timer = null;
+    var next = function(){
+      if(cur >= 0) steps[cur].classList.remove('active');
+      cur = (cur + 1) % steps.length;
+      steps[cur].classList.add('active');
+    };
+    new IntersectionObserver(function(en){
+      if(en[0].isIntersecting){ if(!timer){ next(); timer = setInterval(next, 2500); } }
+      else if(timer){ clearInterval(timer); timer = null; }
+    }, {threshold:.4}).observe(document.querySelector('.steps'));
+  }
+
+  // Instagram: flechas del carrusel
+  var igFeed = document.getElementById('ig-feed'), igPrev = document.getElementById('ig-prev'), igNext = document.getElementById('ig-next');
+  if(igFeed && igPrev && igNext){
+    var igStep = function(){ var c = igFeed.firstElementChild; return c ? c.getBoundingClientRect().width + 24 : igFeed.clientWidth; };
+    var igUpdate = function(){
+      igPrev.disabled = igFeed.scrollLeft < 4;
+      igNext.disabled = igFeed.scrollLeft + igFeed.clientWidth >= igFeed.scrollWidth - 4;
+    };
+    igPrev.addEventListener('click', function(){ igFeed.scrollBy({left: -igStep(), behavior:'smooth'}); });
+    igNext.addEventListener('click', function(){ igFeed.scrollBy({left: igStep(), behavior:'smooth'}); });
+    igFeed.addEventListener('scroll', function(){ window.requestAnimationFrame(igUpdate); }, {passive:true});
+    window.addEventListener('resize', igUpdate);
+    setTimeout(igUpdate, 300); setTimeout(igUpdate, 3000);
   }
 
   // Sube el botón de WhatsApp cuando se ve la firma, para no taparla
