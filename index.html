@@ -313,8 +313,6 @@ section{position:relative}
   content:"";position:absolute;right:-12px;top:-12px;width:38%;height:45%;border-top:3px solid var(--navy-950);border-right:3px solid var(--navy-950);pointer-events:none}
 .photo-wrap{position:relative}
 .name-tag{position:absolute;left:var(--x);top:var(--y);transform:translateX(-50%);background:var(--white);color:var(--navy-950);font-family:var(--font-head);font-weight:700;font-size:clamp(.72rem,.65rem + .35vw,.9rem);letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;white-space:nowrap;box-shadow:0 6px 16px -8px rgba(0,0,0,.5)}
-.name-tag::before{content:"";position:absolute;left:50%;bottom:100%;width:2px;height:clamp(18px,4vw,34px);background:var(--white);transform:translateX(-50%)}
-.name-tag::after{content:"";position:absolute;left:50%;bottom:calc(100% + clamp(18px,4vw,34px) - 2px);transform:translateX(-50%);border:6px solid transparent;border-bottom:8px solid var(--white);border-top:0}
 .name-tag .tw{position:absolute;left:12px;top:6px;white-space:nowrap}
 .js .name-tag .ghost{visibility:hidden}
 .name-tag{transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
