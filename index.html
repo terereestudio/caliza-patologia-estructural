@@ -6,6 +6,7 @@
 <title>CALIZA Patología Estructural | Inspección y diagnóstico de estructuras de hormigón</title>
 <meta name="description" content="Ingenieros civiles especializados en patología estructural. Inspección no destructiva, diagnóstico de fisuras y corrosión, escaneo 2D de armaduras, detección de humedad y cálculo estructural.">
 <meta name="theme-color" content="#061323">
+<meta name="format-detection" content="telephone=no, email=no, address=no">
 <link rel="canonical" href="[COMPLETAR: https://dominio-final/]">
 
 <!-- Open Graph -->
@@ -269,6 +270,18 @@ section{position:relative}
 .service.frame .service-icon{color:var(--navy-700)}
 .service.frame h3{color:var(--navy-950)}
 .service.frame p,.service.frame .service-num{color:var(--text-muted)}
+@media (max-width:699px){
+  .services{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:var(--s3);margin-inline:calc(var(--gutter) * -1);padding:4px var(--gutter) 8px;scroll-padding-inline:var(--gutter);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .services::-webkit-scrollbar{display:none}
+  .service{flex:0 0 84%;scroll-snap-align:start}
+  .service:hover{transform:none}
+  .services .reveal{opacity:1;transform:none}
+}
+.carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:var(--s4)}
+.carousel-dots button{width:28px;height:28px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+.carousel-dots button::before{content:"";width:8px;height:8px;border:1.5px solid var(--navy-700);transition:background .2s,width .2s}
+.carousel-dots button[aria-current="true"]::before{background:var(--navy-700);width:20px}
+@media (min-width:700px){.carousel-dots{display:none}}
 @media (min-width:700px){.services{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1080px){.services{grid-template-columns:repeat(3,1fr)}}
 
@@ -298,6 +311,10 @@ section{position:relative}
 .team-photo img{width:100%;aspect-ratio:1080/851;object-fit:cover;filter:grayscale(.15) contrast(1.03)}
 .team-photo::after{ /* esquina estructural sobre la foto */
   content:"";position:absolute;right:-12px;top:-12px;width:38%;height:45%;border-top:3px solid var(--navy-950);border-right:3px solid var(--navy-950);pointer-events:none}
+.photo-wrap{position:relative}
+.name-tag{position:absolute;left:var(--x);top:var(--y);transform:translateX(-50%);background:var(--white);color:var(--navy-950);font-family:var(--font-head);font-weight:700;font-size:clamp(.72rem,.65rem + .35vw,.9rem);letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;white-space:nowrap;box-shadow:0 6px 16px -8px rgba(0,0,0,.5)}
+.name-tag::before{content:"";position:absolute;left:50%;bottom:100%;width:2px;height:clamp(18px,4vw,34px);background:var(--white);transform:translateX(-50%)}
+.name-tag::after{content:"";position:absolute;left:50%;bottom:calc(100% + clamp(18px,4vw,34px) - 2px);transform:translateX(-50%);border:6px solid transparent;border-bottom:8px solid var(--white);border-top:0}
 .team-photo figcaption{margin-top:var(--s2);font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
 .team-copy h2{font-size:var(--fs-h2);color:var(--navy-950);margin-top:var(--s3)}
 .team-copy p{margin-top:var(--s4);color:var(--text-muted);font-size:var(--fs-lg);max-width:54ch}
@@ -343,19 +360,24 @@ section{position:relative}
 @media (min-width:960px){.contact-grid{grid-template-columns:1fr 1fr;gap:var(--s8);align-items:start}}
 
 /* --- CTA intermedio --- */
-.cta-band{margin-top:clamp(48px,6vw,80px);display:flex;flex-direction:column;gap:var(--s4);align-items:flex-start;justify-content:space-between;padding-block:clamp(40px,5vw,64px);border-top:3px solid var(--navy-950)}
+.cta-band{margin-top:clamp(48px,6vw,80px);padding-bottom:0!important;display:flex;flex-direction:column;gap:var(--s4);align-items:flex-start;justify-content:space-between;padding-block:clamp(40px,5vw,64px);border-top:3px solid var(--navy-950)}
 .cta-band h2{font-size:clamp(1.4rem,1.15rem + 1.1vw,2rem);color:var(--navy-950);max-width:28ch}
 @media (min-width:800px){.cta-band{flex-direction:row;align-items:center}}
+#servicios{padding-bottom:clamp(48px,5vw,80px)}
 
 /* --- Footer --- */
 .site-footer{background:var(--navy-950);color:var(--on-dark-muted);border-top:1px solid var(--line-dark);padding-block:var(--s6) var(--s5);font-size:var(--fs-sm)}
 .footer-inner{display:grid;gap:var(--s4);align-items:center}
 .footer-inner img{height:40px;width:auto}
 .footer-inner nav{display:flex;flex-wrap:wrap;gap:var(--s4)}
-.footer-inner a{text-decoration:none}
+.footer-inner a{text-decoration:none;color:inherit}
+.footer-contact{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.footer-contact a{display:inline-block;padding:2px 0;color:var(--on-dark-muted);-webkit-tap-highlight-color:transparent;transition:color .2s}
+.footer-contact a:hover,.footer-contact a:focus-visible{color:var(--white)}
+a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important}
 .footer-inner a:hover{color:var(--white)}
 .footer-legal{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--line-dark);font-size:var(--fs-xs);font-family:var(--font-mono);letter-spacing:.06em}
-@media (min-width:800px){.footer-inner{grid-template-columns:auto 1fr auto}.footer-inner nav{justify-content:center}}
+@media (min-width:800px){.footer-inner{grid-template-columns:auto 1fr auto}.footer-inner nav{justify-content:center}.footer-contact{text-align:right}}
 
 /* --- Instagram --- */
 .ig-head{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:flex-end;justify-content:space-between;margin-bottom:clamp(32px,4vw,48px)}
@@ -652,6 +674,7 @@ section{position:relative}
           <p>Te explicamos el diagnóstico con claridad y te proponemos soluciones adaptadas a cada caso.</p>
         </li>
       </ul>
+      <div class="carousel-dots" id="services-dots" aria-label="Servicios"></div>
 
       <div class="cta-band reveal">
         <h2>¿Notaste alguna de estas señales en tu construcción?</h2>
@@ -688,8 +711,11 @@ section{position:relative}
   <section class="section bg-stone on-light" id="equipo" aria-labelledby="equipo-title">
     <div class="container team">
       <figure class="team-photo reveal">
-        <img src="assets/img/socios-matias-german.jpg" alt="Germán y Matías, ingenieros civiles y socios fundadores de CALIZA, con casco de obra" width="1080" height="851" loading="lazy">
-        <figcaption>De izquierda a derecha: Germán y Matías</figcaption>
+        <div class="photo-wrap">
+          <img src="assets/img/socios-matias-german.jpg" alt="Germán (izquierda) y Matías (derecha), ingenieros civiles y socios fundadores de CALIZA, con casco de obra" width="1080" height="851" loading="lazy">
+          <span class="name-tag" style="--x:31%;--y:52%" aria-hidden="true">Germán</span>
+          <span class="name-tag" style="--x:63%;--y:45%" aria-hidden="true">Matías</span>
+        </div>
       </figure>
       <div class="team-copy reveal">
         <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>04 — Quiénes somos</span>
@@ -817,7 +843,12 @@ section{position:relative}
         <a href="#contacto">Contacto</a>
         <a href="#instagram">Instagram</a>
       </nav>
-      <a href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">@caliza.patologia</a>
+      <ul class="footer-contact">
+        <li><a class="js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero hacer una consulta.">Matías · 362 420-5886</a></li>
+        <li><a class="js-wa" href="https://wa.me/5493624384988" data-msg="Hola CALIZA, quiero hacer una consulta.">Germán · 362 438-4988</a></li>
+        <li><a href="mailto:caliza.ingcivil@gmail.com">caliza.ingcivil@gmail.com</a></li>
+        <li><a href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">@caliza.patologia</a></li>
+      </ul>
     </div>
     <p class="footer-legal">© <span id="year">2026</span> CALIZA Patología Estructural · <span class="todo">[COMPLETAR: ciudad, provincia]</span></p>
   </div>
@@ -889,6 +920,27 @@ section{position:relative}
     var destino = numeros[Math.random() < .5 ? 0 : 1];
     window.open('https://wa.me/' + destino + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
   });
+
+  // Carrusel de servicios (mobile): puntos sincronizados con el scroll
+  var track = document.querySelector('.services'), dots = document.getElementById('services-dots');
+  if(track && dots){
+    var cards = track.children;
+    for(var i=0;i<cards.length;i++){
+      (function(i){
+        var b = document.createElement('button');
+        b.type = 'button'; b.setAttribute('aria-label','Servicio ' + (i+1));
+        b.addEventListener('click', function(){ track.scrollTo({left: cards[i].offsetLeft - track.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), behavior:'smooth'}); });
+        dots.appendChild(b);
+      })(i);
+    }
+    var setDot = function(){
+      var w = cards[0].getBoundingClientRect().width + 16;
+      var idx = Math.min(cards.length - 1, Math.round(track.scrollLeft / w));
+      Array.prototype.forEach.call(dots.children, function(d,j){ d.setAttribute('aria-current', j===idx); });
+    };
+    track.addEventListener('scroll', function(){ window.requestAnimationFrame(setDot); }, {passive:true});
+    setDot();
+  }
 
   // Sube el botón de WhatsApp cuando se ve la firma, para no taparla
   var firma = document.querySelector('.firma-te'), wa = document.querySelector('.wa-float');
