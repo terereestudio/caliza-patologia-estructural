@@ -368,6 +368,7 @@ section{position:relative}
 @keyframes blink{50%{opacity:0}}
 .team-photo figcaption{margin-top:var(--s2);font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
 .team-copy h2{font-size:var(--fs-h2);color:var(--navy-950);margin-top:var(--s3)}
+@media (min-width:600px){.team-copy h2{font-size:clamp(1.5rem,.6rem + 1.9vw,2.3rem)}.team-copy h2 .l{display:block;white-space:nowrap}}
 .team-copy p{margin-top:var(--s4);color:var(--text-muted);font-size:var(--fs-lg);max-width:54ch}
 .team-copy p strong{color:var(--navy-950);font-weight:600}
 .partners{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
@@ -668,7 +669,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
   <section class="section bg-stone on-light" aria-labelledby="senales-title">
     <div class="container">
       <div class="section-head reveal">
-        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>01 — Cuándo consultar</span>
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>Cuándo consultar</span>
         <h2 id="senales-title">Señales que no conviene dejar pasar.</h2>
         <p>Muchas patologías avanzan en silencio. Estos son los casos en los que una inspección profesional marca la diferencia.</p>
       </div>
@@ -693,44 +694,38 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
   <section class="section on-light" id="servicios" aria-labelledby="servicios-title">
     <div class="container">
       <div class="section-head reveal">
-        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>02 — Servicios</span>
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>Servicios</span>
         <h2 id="servicios-title">Ingeniería civil al servicio de la seguridad estructural.</h2>
         <p>Vamos al origen de cada daño, no solo al síntoma.</p>
       </div>
       <ul class="services">
         <li class="service frame reveal">
           <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-diag"/></svg></div>
-          <span class="service-num">01</span>
           <h3>Inspección y diagnóstico de patologías en estructuras de hormigón</h3>
           <p>Relevamos el estado real de la estructura e identificamos las causas de fisuras, corrosión y otros daños.</p>
         </li>
         <li class="service frame reveal">
           <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-risk"/></svg></div>
-          <span class="service-num">02</span>
           <h3>Evaluación de riesgos estructurales</h3>
           <p>Determinamos cuán comprometida está la estructura y qué tan urgente es intervenir.</p>
         </li>
         <li class="service frame reveal">
           <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-scan"/></svg></div>
-          <span class="service-num">03</span>
           <h3>Detección y análisis de armaduras con escaneo 2D</h3>
           <p>Ubicamos las armaduras sin romper, para verificar su disposición antes de perforar, reforzar o intervenir.</p>
         </li>
         <li class="service frame reveal">
           <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-pipe"/></svg></div>
-          <span class="service-num">04</span>
           <h3>Identificación de caños de agua y zonas con humedad</h3>
           <p>Localizamos instalaciones y focos de humedad para actuar con precisión y sin roturas innecesarias.</p>
         </li>
         <li class="service frame reveal">
           <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-calc"/></svg></div>
-          <span class="service-num">05</span>
           <h3>Cálculo de estructuras nuevas o existentes</h3>
           <p>Dimensionamos estructuras nuevas y verificamos las existentes ante reformas, ampliaciones o nuevas cargas.</p>
         </li>
         <li class="service frame reveal">
           <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-advice"/></svg></div>
-          <span class="service-num">06</span>
           <h3>Recomendaciones y asesoramiento técnico especializado</h3>
           <p>Te explicamos el diagnóstico con claridad y te proponemos soluciones adaptadas a cada caso.</p>
         </li>
@@ -750,7 +745,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
   <section class="section dark" id="metodo" aria-labelledby="metodo-title">
     <div class="container">
       <div class="section-head reveal">
-        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>03 — Cómo trabajamos</span>
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>Cómo trabajamos</span>
         <h2 id="metodo-title">Un enfoque integral, paso a paso.</h2>
         <p>Detectar las fallas a tiempo es la forma más segura y económica de cuidar una construcción.</p>
       </div>
@@ -779,8 +774,8 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
         </div>
       </figure>
       <div class="team-copy reveal">
-        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>04 — Quiénes somos</span>
-        <h2 id="equipo-title">Somos Matías y Germán, y juntos creamos CALIZA.</h2>
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>Quiénes somos</span>
+        <h2 id="equipo-title"><span class="l">Somos Germán y Matías</span> <span class="l">y juntos creamos CALIZA.</span></h2>
         <p>Somos <strong>ingenieros civiles</strong> con experiencia en cálculo estructural, inspección y análisis de patologías en estructuras de hormigón. Nos especializamos en detectar fallas a tiempo y en ofrecer soluciones que garanticen la <strong>seguridad y durabilidad</strong> de cada construcción.</p>
       </div>
       <ul class="partners reveal">
@@ -794,7 +789,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
   <section class="section on-light" aria-labelledby="faq-title">
     <div class="container">
       <div class="section-head reveal">
-        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>05 — Preguntas frecuentes</span>
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>Preguntas frecuentes</span>
         <h2 id="faq-title">Lo que suelen preguntarnos.</h2>
       </div>
       <div class="faq reveal">
@@ -819,7 +814,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
     <div class="container contact-grid">
       <div class="reveal">
         <div class="section-head" style="margin-bottom:0">
-          <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>06 — Contacto</span>
+          <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>Contacto</span>
           <h2 id="contacto-title">Contanos qué está pasando con tu estructura.</h2>
           <p>Te respondemos y coordinamos la inspección.</p>
         </div>
@@ -869,7 +864,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
     <div class="container">
       <div class="ig-head reveal">
         <div class="section-head">
-          <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>07 — En obra</span>
+          <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>En obra</span>
           <h2 id="ig-title">Seguí nuestro trabajo en Instagram.</h2>
           <p>Inspecciones, casos y novedades en @caliza.patologia.</p>
         </div>
