@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CALIZA Patología Estructural | Inspección y diagnóstico de estructuras de hormigón</title>
+<meta name="description" content="Ingenieros civiles especializados en patología estructural. Inspección no destructiva, diagnóstico de fisuras y corrosión, escaneo 2D de armaduras, detección de humedad y cálculo estructural.">
+<meta name="theme-color" content="#061323">
+<link rel="canonical" href="[COMPLETAR: https://dominio-final/]">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:title" content="CALIZA Patología Estructural">
+<meta property="og:description" content="Diagnóstico preciso para estructuras de hormigón. Inspección no destructiva, evaluación de riesgos y asesoramiento técnico.">
+<meta property="og:image" content="assets/img/og-caliza.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<!-- Tipografías: Archivo (titulares) + IBM Plex Sans (texto) + IBM Plex Mono (rótulos técnicos) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Datos estructurados -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "CALIZA Patología Estructural",
+  "description": "Inspección, diagnóstico y evaluación de patologías en estructuras de hormigón. Escaneo 2D de armaduras, detección de humedad y cálculo estructural.",
+  "image": "assets/img/og-caliza.jpg",
+  "logo": "assets/img/caliza-isotipo.png",
+  "email": "caliza.ingcivil@gmail.com",
+  "telephone": ["+5493624205886", "+5493624384988"],
+  "areaServed": "[COMPLETAR: zona de cobertura]",
+  "sameAs": ["https://www.instagram.com/caliza.patologia"],
+  "founder": [
+    {"@type": "Person", "name": "Germán [COMPLETAR: apellido]", "jobTitle": "Ingeniero civil"},
+    {"@type": "Person", "name": "Matías [COMPLETAR: apellido]", "jobTitle": "Ingeniero civil"}
+  ],
+  "knowsAbout": ["Patología estructural", "Estructuras de hormigón", "Ensayos no destructivos", "Cálculo estructural"]
+}
+</script>
+
+<style>
+/* =========================================================
+   1. DESIGN TOKENS
+   ========================================================= */
+:root{
+  /* Color — derivado del logo */
+  --navy-950:#061323;   /* fondo exacto del logo horizontal */
+  --navy-900:#0a1b2f;
+  --navy-800:#12253c;
+  --navy-700:#152b43;   /* azul del wordmark */
+  --slate-600:#293646;
+  --concrete-500:#818d8d; /* gris hormigón del isotipo */
+  --concrete-300:#b9c1c1;
+  --concrete-200:#d6dbdb;
+  --stone-100:#eceeec;  /* "caliza": piedra clara */
+  --white:#ffffff;
+  --text:#132233;
+  --text-muted:#4a5664;  /* AA sobre stone-100 y blanco */
+  --on-dark:#e9edef;
+  --on-dark-muted:#a8b3bd; /* AA sobre navy-950 */
+  --line-dark:rgba(255,255,255,.12);
+  --line-light:#cdd3d4;
+  --wa:#1d8a4b;
+
+  /* Tipografía */
+  --font-head:"Archivo",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans",system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+  --fs-xs:clamp(.72rem,.7rem + .1vw,.78rem);
+  --fs-sm:clamp(.88rem,.85rem + .15vw,.95rem);
+  --fs-base:clamp(1rem,.96rem + .2vw,1.08rem);
+  --fs-lg:clamp(1.12rem,1.05rem + .35vw,1.3rem);
+  --fs-h3:clamp(1.15rem,1.08rem + .35vw,1.35rem);
+  --fs-h2:clamp(1.75rem,1.4rem + 1.6vw,2.7rem);
+  --fs-h1:clamp(2.2rem,1.6rem + 3vw,4.1rem);
+
+  /* Espaciado (base 8) */
+  --s1:4px;--s2:8px;--s3:16px;--s4:24px;--s5:32px;--s6:48px;--s7:64px;--s8:96px;--s9:128px;
+  --section-y:clamp(64px,8vw,120px);
+  --container:1180px;
+  --gutter:clamp(16px,4vw,32px);
+  --header-h:68px;
+}
+
+/* =========================================================
+   2. BASE
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 8px);-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);font-size:var(--fs-base);line-height:1.6;color:var(--text);background:var(--white);overflow-x:hidden}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font-head);line-height:1.08;margin:0;letter-spacing:-.015em}
+p{margin:0}
+:focus-visible{outline:2px solid var(--concrete-300);outline-offset:3px}
+.on-light :focus-visible{outline-color:var(--navy-700)}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--white);color:var(--navy-950);padding:8px 14px;z-index:200;font-weight:600}
+.skip:focus{left:8px}
+.container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Marcador de datos faltantes (eliminar al completar) */
+.todo{background:#fff1b8;color:#4a3a00;font-family:var(--font-mono);font-size:.85em;padding:0 .35em;outline:1px dashed #b38f00}
+
+/* =========================================================
+   3. COMPONENTES
+   ========================================================= */
+/* Rótulo técnico de sección: mira + numeración */
+.label{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:var(--fs-xs);font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--text-muted)}
+.label svg{width:16px;height:16px;flex:none}
+.dark .label{color:var(--on-dark-muted)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;font-family:var(--font-head);font-weight:600;font-size:var(--fs-sm);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:1.5px solid transparent;border-radius:2px;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-primary{background:var(--white);color:var(--navy-950)}
+.btn-primary:hover{background:var(--concrete-200)}
+.btn-ghost{border-color:rgba(255,255,255,.35);color:var(--white)}
+.btn-ghost:hover{border-color:var(--white)}
+.btn-dark{background:var(--navy-950);color:var(--white)}
+.btn-dark:hover{background:var(--slate-600)}
+.btn:active{transform:translateY(1px)}
+
+/* Esquina estructural (pórtico del logo) */
+.frame{position:relative}
+.frame::before,.frame::after{content:"";position:absolute;background:currentColor;opacity:.9;transition:transform .35s ease}
+.frame::before{top:14px;right:22px;width:2px;height:34px}
+.frame::after{top:22px;right:14px;width:34px;height:2px}
+
+/* =========================================================
+   4. HEADER
+   ========================================================= */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:100;background:var(--navy-950);border-bottom:1px solid transparent;transition:border-color .3s}
+.site-header.scrolled{border-bottom-color:var(--line-dark)}
+.header-inner{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:var(--s4)}
+.brand{display:block;flex:none}
+.brand img{height:48px;width:auto}
+.nav{display:flex;align-items:center;gap:var(--s5)}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:var(--s5)}
+.nav a:not(.btn){color:var(--on-dark-muted);text-decoration:none;font-size:var(--fs-sm);font-weight:500;letter-spacing:.04em;padding:8px 0;position:relative;transition:color .2s}
+.nav a:not(.btn)::after{content:"";position:absolute;left:0;bottom:2px;height:1.5px;width:0;background:var(--white);transition:width .25s}
+.nav a:not(.btn):hover{color:var(--white)}
+.nav a:not(.btn):hover::after{width:100%}
+.nav .btn{min-height:42px;padding:0 18px}
+.menu-toggle{display:none;background:none;border:0;color:var(--white);width:44px;height:44px;padding:10px;cursor:pointer}
+.menu-toggle span{display:block;height:2px;background:currentColor;margin:5px 0;transition:transform .25s,opacity .25s}
+.menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+@media (max-width:899px){
+  .brand img{height:40px}
+  .menu-toggle{display:block}
+  .nav{position:fixed;top:var(--header-h);left:0;right:0;background:var(--navy-950);flex-direction:column;align-items:stretch;gap:0;padding:var(--s3) var(--gutter) var(--s5);border-bottom:1px solid var(--line-dark);transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+  .nav.open{opacity:1;visibility:visible;transform:none}
+  .nav ul{flex-direction:column;gap:0}
+  .nav li a:not(.btn){display:block;padding:14px 0;font-size:1rem;border-bottom:1px solid var(--line-dark)}
+  .nav .btn{margin-top:var(--s4);min-height:52px}
+}
+
+/* =========================================================
+   5. HERO
+   ========================================================= */
+.dark{background:var(--navy-950);color:var(--on-dark)}
+.hero{position:relative;padding-top:calc(var(--header-h) + clamp(40px,7vw,96px));padding-bottom:clamp(80px,10vw,140px);overflow:hidden}
+.hero::before{ /* grilla de relevamiento */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line-dark) 1px,transparent 1px),linear-gradient(90deg,var(--line-dark) 1px,transparent 1px);
+  background-size:48px 48px;opacity:.35;
+  -webkit-mask-image:radial-gradient(ellipse at 75% 40%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 75% 40%,#000 0%,transparent 70%)}
+.hero-grid{position:relative;display:grid;gap:var(--s6);align-items:center}
+.hero h1{font-size:var(--fs-h1);font-weight:700;color:var(--white);margin-top:var(--s4);max-width:14ch}
+.hero .lead{font-size:var(--fs-lg);color:var(--on-dark-muted);margin-top:var(--s4);max-width:52ch}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s5)}
+.hero-facts{list-style:none;padding:0;margin:var(--s6) 0 0;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:var(--s3) var(--s5);border-top:1px solid var(--line-dark);padding-top:var(--s4)}
+.hero-facts li{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-muted);display:flex;align-items:center;gap:8px}
+.hero-facts li::before{content:"";width:6px;height:6px;border:1.5px solid var(--concrete-300);flex:none}
+.hero-visual{width:100%;max-width:520px;justify-self:center}
+.hero-visual svg{width:100%;height:auto;overflow:visible}
+@media (max-width:599px){
+  .hero-facts{grid-template-columns:1fr}
+  .hero-ctas .btn{width:100%}
+}
+@media (min-width:960px){
+  .hero-grid{grid-template-columns:1.1fr .9fr}
+  .hero-visual{justify-self:end}
+}
+
+/* animación del escaneo */
+.scan-bar{animation:scan 6s cubic-bezier(.45,0,.55,1) infinite alternate}
+@keyframes scan{from{transform:translateX(0)}to{transform:translateX(330px)}}
+.hit{opacity:.25;animation:hit 6s linear infinite alternate}
+.hit:nth-of-type(2){animation-delay:.9s}.hit:nth-of-type(3){animation-delay:1.8s}.hit:nth-of-type(4){animation-delay:2.7s}.hit:nth-of-type(5){animation-delay:3.6s}
+@keyframes hit{0%,40%{opacity:.25}50%,100%{opacity:1}}
+.target-ring{transform-origin:center;transform-box:fill-box;animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.8);opacity:0}}
+
+/* corte irregular (borde fisurado del isotipo) */
+.crack-edge{position:absolute;left:0;right:0;bottom:-1px;height:clamp(28px,4vw,56px);color:var(--stone-100)}
+.crack-edge svg{width:100%;height:100%;display:block}
+
+/* =========================================================
+   6. SECCIONES GENERALES
+   ========================================================= */
+section{position:relative}
+.section{padding-block:var(--section-y)}
+.bg-stone{background:var(--stone-100)}
+.section-head{display:grid;gap:var(--s3);margin-bottom:clamp(40px,5vw,64px);max-width:720px}
+.section-head h2{font-size:var(--fs-h2);font-weight:700;color:var(--navy-950)}
+.section-head p{color:var(--text-muted);font-size:var(--fs-lg)}
+.dark .section-head h2{color:var(--white)}
+.dark .section-head p{color:var(--on-dark-muted)}
+
+/* --- Señales --- */
+.signals{display:grid;gap:1px;background:var(--line-light);border:1px solid var(--line-light);list-style:none;padding:0;margin:0}
+.signals li{background:var(--stone-100);padding:var(--s4);display:flex;gap:var(--s3);align-items:flex-start}
+.signals svg{width:26px;height:26px;flex:none;color:var(--navy-700);margin-top:2px}
+.signals strong{display:block;font-family:var(--font-head);font-weight:600;color:var(--navy-950);font-size:var(--fs-base);line-height:1.3}
+.signals span{display:block;color:var(--text-muted);font-size:var(--fs-sm);margin-top:4px}
+.signals-note{margin-top:var(--s5);font-family:var(--font-head);font-weight:600;font-size:var(--fs-lg);color:var(--navy-950);max-width:46ch;padding-left:var(--s3);border-left:3px solid var(--navy-950)}
+@media (min-width:640px){.signals{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.signals{grid-template-columns:repeat(3,1fr)}}
+
+/* --- Servicios --- */
+.services{display:grid;gap:var(--s4);list-style:none;padding:0;margin:0}
+.service{color:var(--navy-950);background:var(--white);border:1px solid var(--line-light);padding:var(--s5) var(--s4) var(--s4);display:flex;flex-direction:column;gap:var(--s3);transition:border-color .25s,box-shadow .25s,transform .25s}
+.service .frame-wrap{color:var(--concrete-300)}
+.service:hover{border-color:var(--navy-700);box-shadow:0 18px 40px -24px rgba(6,19,35,.45);transform:translateY(-3px)}
+.service:hover::before{transform:translateY(-4px)}
+.service:hover::after{transform:translateX(4px)}
+.service-top{display:flex;align-items:center;justify-content:space-between}
+.service-num{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.2em;color:var(--text-muted)}
+.service-icon{width:44px;height:44px;color:var(--navy-700)}
+.service h3{font-size:var(--fs-h3);font-weight:600;line-height:1.25}
+.service p{color:var(--text-muted);font-size:var(--fs-sm)}
+.service.frame{color:var(--concrete-300)}
+.service.frame > *{color:initial}
+.service.frame .service-icon{color:var(--navy-700)}
+.service.frame h3{color:var(--navy-950)}
+.service.frame p,.service.frame .service-num{color:var(--text-muted)}
+@media (min-width:700px){.services{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.services{grid-template-columns:repeat(3,1fr)}}
+
+/* --- Método --- */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:step}
+.step{position:relative;padding:var(--s4) 0 var(--s4) 64px;border-top:1px solid var(--line-dark)}
+.step:last-child{border-bottom:1px solid var(--line-dark)}
+.step-n{position:absolute;left:0;top:var(--s4);font-family:var(--font-mono);font-size:var(--fs-sm);color:var(--concrete-300);letter-spacing:.1em}
+.step h3{font-size:var(--fs-h3);font-weight:600;color:var(--white)}
+.step p{color:var(--on-dark-muted);font-size:var(--fs-sm);margin-top:6px;max-width:40ch}
+.diffs{display:grid;gap:var(--s3);margin-top:var(--s6)}
+.diff{border:1px solid var(--line-dark);padding:var(--s4);display:flex;gap:var(--s3);align-items:flex-start}
+.diff svg{width:28px;height:28px;flex:none;color:var(--concrete-300)}
+.diff strong{display:block;font-family:var(--font-head);font-weight:600;color:var(--white);line-height:1.3}
+.diff span{display:block;font-size:var(--fs-sm);color:var(--on-dark-muted);margin-top:4px}
+@media (min-width:800px){
+  .steps{grid-template-columns:repeat(4,1fr)}
+  .step{padding:var(--s7) var(--s4) var(--s4) 0;border-top:0;border-bottom:0;border-left:1px solid var(--line-dark);padding-left:var(--s4)}
+  .step:last-child{border-bottom:0;border-right:1px solid var(--line-dark)}
+  .step-n{top:var(--s4);left:var(--s4)}
+  .diffs{grid-template-columns:repeat(3,1fr)}
+}
+
+/* --- Equipo --- */
+.team{display:grid;gap:var(--s6);align-items:center}
+.team-photo{position:relative;margin:0}
+.team-photo img{width:100%;aspect-ratio:1080/851;object-fit:cover;filter:grayscale(.15) contrast(1.03)}
+.team-photo::after{ /* esquina estructural sobre la foto */
+  content:"";position:absolute;right:-12px;top:-12px;width:38%;height:45%;border-top:3px solid var(--navy-950);border-right:3px solid var(--navy-950);pointer-events:none}
+.team-photo figcaption{margin-top:var(--s2);font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+.team-copy h2{font-size:var(--fs-h2);color:var(--navy-950);margin-top:var(--s3)}
+.team-copy p{margin-top:var(--s4);color:var(--text-muted);font-size:var(--fs-lg);max-width:54ch}
+.team-copy p strong{color:var(--navy-950);font-weight:600}
+.partners{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;gap:var(--s3)}
+.partners li{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);flex-wrap:wrap;border-top:1px solid var(--line-light);padding-top:var(--s3)}
+.partners b{font-family:var(--font-head);font-size:var(--fs-h3);color:var(--navy-950);font-weight:600}
+.partners span{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+@media (min-width:960px){.team{grid-template-columns:1fr 1fr;gap:var(--s8)}}
+
+/* --- FAQ --- */
+.faq{max-width:820px}
+.faq details{border-top:1px solid var(--line-light)}
+.faq details:last-of-type{border-bottom:1px solid var(--line-light)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:var(--s3);padding:var(--s4) 0;font-family:var(--font-head);font-weight:600;font-size:var(--fs-h3);color:var(--navy-950)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .plus{width:22px;height:22px;position:relative;flex:none}
+.faq summary .plus::before,.faq summary .plus::after{content:"";position:absolute;background:var(--navy-950);left:50%;top:50%;transform:translate(-50%,-50%)}
+.faq summary .plus::before{width:18px;height:2px}
+.faq summary .plus::after{width:2px;height:18px;transition:transform .25s}
+.faq details[open] .plus::after{transform:translate(-50%,-50%) scaleY(0)}
+.faq details p{padding-bottom:var(--s4);color:var(--text-muted);max-width:64ch}
+
+/* --- Contacto --- */
+.contact-grid{display:grid;gap:var(--s6)}
+.contact-list{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;gap:var(--s3)}
+.contact-list a{display:flex;align-items:center;gap:var(--s3);text-decoration:none;padding:var(--s3);border:1px solid var(--line-dark);transition:border-color .2s,background .2s}
+.contact-list a:hover{border-color:var(--concrete-300);background:rgba(255,255,255,.03)}
+.contact-list svg{width:24px;height:24px;flex:none;color:var(--concrete-300)}
+.contact-list small{display:block;font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-muted)}
+.contact-list b{display:block;font-weight:500;color:var(--white);word-break:break-word}
+.form{background:var(--white);color:var(--text);padding:clamp(24px,4vw,40px);display:grid;gap:var(--s4)}
+.form h3{font-size:var(--fs-h3);color:var(--navy-950)}
+.form p.hint{font-size:var(--fs-sm);color:var(--text-muted);margin-top:-8px}
+.field{display:grid;gap:6px}
+.field label{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.field input,.field select,.field textarea{font:inherit;font-size:1rem;color:var(--text);background:var(--stone-100);border:1px solid var(--line-light);border-radius:2px;padding:12px 14px;min-height:48px;width:100%}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--navy-700);outline-offset:0;border-color:var(--navy-700);background:var(--white)}
+.form .btn{width:100%}
+.form .alt{font-size:var(--fs-sm);color:var(--text-muted);text-align:center}
+.form .alt a{color:var(--navy-700);font-weight:600}
+@media (min-width:960px){.contact-grid{grid-template-columns:1fr 1fr;gap:var(--s8);align-items:start}}
+
+/* --- CTA intermedio --- */
+.cta-band{margin-top:clamp(48px,6vw,80px);display:flex;flex-direction:column;gap:var(--s4);align-items:flex-start;justify-content:space-between;padding-block:clamp(40px,5vw,64px);border-top:3px solid var(--navy-950)}
+.cta-band h2{font-size:clamp(1.4rem,1.15rem + 1.1vw,2rem);color:var(--navy-950);max-width:28ch}
+@media (min-width:800px){.cta-band{flex-direction:row;align-items:center}}
+
+/* --- Footer --- */
+.site-footer{background:var(--navy-950);color:var(--on-dark-muted);border-top:1px solid var(--line-dark);padding-block:var(--s6) var(--s5);font-size:var(--fs-sm)}
+.footer-inner{display:grid;gap:var(--s4);align-items:center}
+.footer-inner img{height:40px;width:auto}
+.footer-inner nav{display:flex;flex-wrap:wrap;gap:var(--s4)}
+.footer-inner a{text-decoration:none}
+.footer-inner a:hover{color:var(--white)}
+.footer-legal{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--line-dark);font-size:var(--fs-xs);font-family:var(--font-mono);letter-spacing:.06em}
+@media (min-width:800px){.footer-inner{grid-template-columns:auto 1fr auto}.footer-inner nav{justify-content:center}}
+
+/* --- WhatsApp flotante --- */
+.wa-float{position:fixed;right:16px;bottom:16px;z-index:90;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);transition:transform .2s}
+.wa-float:hover{transform:scale(1.06)}
+.wa-float svg{width:30px;height:30px}
+
+/* --- Revelado al scrollear --- */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .hit{opacity:1}
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<!-- ======================= SVG SPRITE (íconos) ======================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Mira (recurso del isotipo) -->
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6.5"/><path d="M12 2v20M2 12h20"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.24 8.24 0 0 1 8.24 8.24c0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.29Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14"/><path d="m3 6 9 7 9-7"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+    <!-- Señales -->
+    <symbol id="i-crack" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="26" height="26"/><path d="M11 3l3 6-3 4 5 5-2 4 4 7"/></symbol>
+    <symbol id="i-rust" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 22h26M3 10h26"/><circle cx="9" cy="16" r="3"/><circle cx="23" cy="16" r="3"/><path d="M16 22v4M13 22l-1 3M19 22l1 3"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 4c5 7 8 11 8 15a8 8 0 0 1-16 0c0-4 3-8 8-15Z"/><path d="M12 20a4 4 0 0 0 4 4"/></symbol>
+    <symbol id="i-deform" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 28V8M28 28V8"/><path d="M4 9c8 7 16 7 24 0"/><path d="M16 15v5m-2-2 2 2 2-2"/></symbol>
+    <symbol id="i-build" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 28h24M7 28V12h10v16M17 18h8v10"/><path d="M21 4v10M16 9h10"/></symbol>
+    <symbol id="i-key" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 15 16 5l12 10M7 13v15h18V13"/><circle cx="16" cy="19" r="3"/><path d="M16 22v3"/></symbol>
+    <!-- Servicios -->
+    <symbol id="s-diag" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h22l4 5-3 6 6 6 3 9 5 4v6H4Z"/><circle cx="16" cy="28" r="6"/><path d="M16 18v20M6 28h20"/></symbol>
+    <symbol id="s-risk" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 32a16 16 0 0 1 32 0"/><path d="M6 32h32"/><path d="M22 32 31 20"/><circle cx="22" cy="32" r="2.2" fill="currentColor"/><path d="M10 26l3 1.5M15 19.5l2 2.5M22 16v3M29 19.5l-2 2.5"/></symbol>
+    <symbol id="s-scan" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="8" width="36" height="28"/><path d="M4 18h36M4 28h36" stroke-dasharray="3 3"/><path d="M24 4v36" stroke-width="2"/><circle cx="24" cy="18" r="3"/><circle cx="24" cy="28" r="3"/></symbol>
+    <symbol id="s-pipe" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 14h16a6 6 0 0 1 6 6v20M4 22h12a2 2 0 0 1 2 2v16"/><path d="M34 6c3.5 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2.5-6 6-11Z"/></symbol>
+    <symbol id="s-calc" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h36M10 12v28M34 12v28M4 40h36"/><path d="M10 12 22 4l12 8"/><path d="M14 22h16M14 30h16" stroke-dasharray="2 3"/></symbol>
+    <symbol id="s-advice" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4h20l7 7v29H9Z"/><path d="M29 4v7h7"/><path d="M15 20h14M15 26h14M15 32h8"/><path d="m27 33 3 3 6-7"/></symbol>
+    <!-- Diferenciales -->
+    <symbol id="d-ndt" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="3" width="20" height="26" rx="2"/><rect x="10" y="7" width="12" height="9"/><path d="M10 20h12M10 24h7"/></symbol>
+    <symbol id="d-eng" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18a10 10 0 0 1 20 0"/><path d="M4 18h24v3H4zM16 8v5M12 10l1 3M20 10l-1 3"/></symbol>
+    <symbol id="d-fit" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="5"/><path d="M16 2v6M16 24v6M2 16h6M24 16h6"/></symbol>
+  </defs>
+</svg>
+
+<!-- ======================= HEADER ======================= -->
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="CALIZA Patología Estructural, ir al inicio">
+      <img src="assets/img/caliza-logo-horizontal.jpg" alt="CALIZA Patología Estructural" width="1079" height="300">
+    </a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#metodo">Cómo trabajamos</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a class="btn btn-primary js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero consultar por una inspección estructural.">
+        <svg aria-hidden="true"><use href="#i-wa"/></svg>Consultar
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ======================= HERO ======================= -->
+  <section class="hero dark" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div>
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>Ingeniería civil · Patología estructural</span>
+        <h1 id="hero-title">Diagnóstico preciso para estructuras de hormigón.</h1>
+        <p class="lead">Inspeccionamos tu estructura con tecnología no destructiva, detectamos fisuras, corrosión y otros daños que pueden comprometer su resistencia, y te proponemos la solución adecuada para garantizar su seguridad y durabilidad.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero solicitar una inspección estructural.">
+            <svg aria-hidden="true"><use href="#i-wa"/></svg>Solicitá una inspección
+          </a>
+          <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+        </div>
+        <ul class="hero-facts">
+          <li>Ingenieros civiles</li>
+          <li>Ensayos no destructivos</li>
+          <li>Escaneo 2D de armaduras</li>
+        </ul>
+      </div>
+
+      <!-- Visual: relevamiento de un elemento de hormigón (recursos gráficos del isotipo: borde fisurado, pórtico y mira) -->
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 480 420" fill="none">
+          <!-- pórtico -->
+          <path d="M210 74H470M432 24V360" stroke="#3a4a5e" stroke-width="12"/>
+          <!-- elemento de hormigón con borde fisurado -->
+          <path d="M30 24H176L212 66L246 74L234 112L286 168L330 188L350 248H392L400 290L440 326L470 336V400H30Z" fill="#818d8d" fill-opacity=".16" stroke="#818d8d" stroke-width="1.5"/>
+          <!-- armaduras detectadas -->
+          <g stroke="#a8b3bd" stroke-width="1.2" stroke-dasharray="4 5" opacity=".7">
+            <path d="M50 300H450M50 360H460"/>
+            <path d="M90 60V390M170 60V390"/>
+          </g>
+          <g fill="#d6dbdb">
+            <circle class="hit" cx="90" cy="300" r="5"/>
+            <circle class="hit" cx="170" cy="300" r="5"/>
+            <circle class="hit" cx="250" cy="300" r="5"/>
+            <circle class="hit" cx="330" cy="300" r="5"/>
+            <circle class="hit" cx="410" cy="300" r="5"/>
+          </g>
+          <!-- barra de escaneo -->
+          <g class="scan-bar">
+            <rect x="60" y="270" width="2" height="120" fill="#ffffff" opacity=".85"/>
+            <rect x="40" y="252" width="42" height="18" fill="#ffffff"/>
+            <text x="61" y="265" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#061323" letter-spacing="1">2D</text>
+          </g>
+          <!-- mira sobre la fisura -->
+          <g transform="translate(118 176)">
+            <circle class="target-ring" r="30" stroke="#ffffff" stroke-width="1.5" opacity=".6"/>
+            <circle r="30" stroke="#ffffff" stroke-width="3"/>
+            <path d="M0-52V52M-52 0H52" stroke="#ffffff" stroke-width="3"/>
+          </g>
+          <!-- rótulos técnicos -->
+          <g font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.6" fill="#a8b3bd">
+            <text x="30" y="14">PUNTO DE INSPECCIÓN</text>
+            <text x="300" y="416">ARMADURA DETECTADA</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- borde fisurado hacia la siguiente sección -->
+    <div class="crack-edge" aria-hidden="true">
+      <svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path fill="currentColor" d="M0 56V30L120 22 168 34 260 18 330 26 372 8 470 20 540 14 600 30 700 24 760 36 860 12 940 20 1010 6 1080 22 1170 18 1240 34 1330 16 1440 26V56Z"/></svg>
+    </div>
+  </section>
+
+  <!-- ======================= SEÑALES (problema) ======================= -->
+  <section class="section bg-stone on-light" aria-labelledby="senales-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>01 — Cuándo consultar</span>
+        <h2 id="senales-title">Señales que no conviene dejar pasar.</h2>
+        <p>Muchas patologías avanzan en silencio. Estos son los casos en los que una inspección profesional marca la diferencia.</p>
+      </div>
+      <ul class="signals reveal">
+        <li><svg aria-hidden="true"><use href="#i-crack"/></svg><div><strong>Fisuras o grietas</strong><span>En vigas, columnas, losas o muros, sobre todo si crecen con el tiempo.</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-rust"/></svg><div><strong>Óxido o armaduras expuestas</strong><span>Desprendimiento del recubrimiento y manchas de corrosión.</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-drop"/></svg><div><strong>Humedad persistente</strong><span>Manchas, filtraciones o pérdidas que no encuentran su origen.</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-deform"/></svg><div><strong>Deformaciones</strong><span>Losas o vigas que flexan, pisos desnivelados, aberturas que se traban.</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-build"/></svg><div><strong>Reformas y ampliaciones</strong><span>Antes de sumar un piso, abrir un vano o agregar cargas.</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-key"/></svg><div><strong>Compra de un inmueble</strong><span>Para conocer el estado real de la estructura antes de decidir.</span></div></li>
+      </ul>
+      <p class="signals-note reveal">Un diagnóstico a tiempo evita reparaciones mayores y, sobre todo, riesgos.</p>
+    </div>
+  </section>
+
+  <!-- ======================= SERVICIOS ======================= -->
+  <section class="section on-light" id="servicios" aria-labelledby="servicios-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>02 — Servicios</span>
+        <h2 id="servicios-title">Ingeniería civil al servicio de la seguridad estructural.</h2>
+        <p>Vamos al origen de cada daño, no solo al síntoma.</p>
+      </div>
+      <ul class="services">
+        <li class="service frame reveal">
+          <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-diag"/></svg></div>
+          <span class="service-num">01</span>
+          <h3>Inspección y diagnóstico de patologías en estructuras de hormigón</h3>
+          <p>Relevamos el estado real de la estructura e identificamos las causas de fisuras, corrosión y otros daños.</p>
+        </li>
+        <li class="service frame reveal">
+          <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-risk"/></svg></div>
+          <span class="service-num">02</span>
+          <h3>Evaluación de riesgos estructurales</h3>
+          <p>Determinamos cuán comprometida está la estructura y qué tan urgente es intervenir.</p>
+        </li>
+        <li class="service frame reveal">
+          <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-scan"/></svg></div>
+          <span class="service-num">03</span>
+          <h3>Detección y análisis de armaduras con escaneo 2D</h3>
+          <p>Ubicamos las armaduras sin romper, para verificar su disposición antes de perforar, reforzar o intervenir.</p>
+        </li>
+        <li class="service frame reveal">
+          <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-pipe"/></svg></div>
+          <span class="service-num">04</span>
+          <h3>Identificación de caños de agua y zonas con humedad</h3>
+          <p>Localizamos instalaciones y focos de humedad para actuar con precisión y sin roturas innecesarias.</p>
+        </li>
+        <li class="service frame reveal">
+          <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-calc"/></svg></div>
+          <span class="service-num">05</span>
+          <h3>Cálculo de estructuras nuevas o existentes</h3>
+          <p>Dimensionamos estructuras nuevas y verificamos las existentes ante reformas, ampliaciones o nuevas cargas.</p>
+        </li>
+        <li class="service frame reveal">
+          <div class="service-top"><svg class="service-icon" aria-hidden="true"><use href="#s-advice"/></svg></div>
+          <span class="service-num">06</span>
+          <h3>Recomendaciones y asesoramiento técnico especializado</h3>
+          <p>Te explicamos el diagnóstico con claridad y te proponemos soluciones adaptadas a cada caso.</p>
+        </li>
+      </ul>
+
+      <div class="cta-band reveal">
+        <h2>¿Notaste alguna de estas señales en tu construcción?</h2>
+        <a class="btn btn-dark js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, noté un problema en mi construcción y quiero hacer una consulta.">
+          <svg aria-hidden="true"><use href="#i-wa"/></svg>Consultanos por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= MÉTODO + DIFERENCIALES ======================= -->
+  <section class="section dark" id="metodo" aria-labelledby="metodo-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>03 — Cómo trabajamos</span>
+        <h2 id="metodo-title">Un enfoque integral, paso a paso.</h2>
+        <p>Detectar las fallas a tiempo es la forma más segura y económica de cuidar una construcción.</p>
+      </div>
+      <ol class="steps reveal">
+        <li class="step"><span class="step-n">01</span><h3>Consulta</h3><p>Nos contás qué observás y, si podés, nos mandás fotos por WhatsApp.</p></li>
+        <li class="step"><span class="step-n">02</span><h3>Inspección</h3><p>Relevamos la estructura en el lugar con equipos de detección no destructiva.</p></li>
+        <li class="step"><span class="step-n">03</span><h3>Análisis</h3><p>Evaluamos causas, alcance del daño y nivel de riesgo.</p></li>
+        <li class="step"><span class="step-n">04</span><h3>Recomendaciones</h3><p>Te explicamos el diagnóstico y las soluciones a seguir.</p></li>
+      </ol>
+      <div class="diffs">
+        <div class="diff reveal"><svg aria-hidden="true"><use href="#d-ndt"/></svg><div><strong>Tecnología no destructiva</strong><span>Evaluamos el estado real de la estructura sin romper.</span></div></div>
+        <div class="diff reveal"><svg aria-hidden="true"><use href="#d-eng"/></svg><div><strong>Ingenieros civiles</strong><span>Experiencia en cálculo estructural, inspección y análisis de patologías.</span></div></div>
+        <div class="diff reveal"><svg aria-hidden="true"><use href="#d-fit"/></svg><div><strong>Soluciones a medida</strong><span>Cada estructura es distinta: el asesoramiento también.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EQUIPO ======================= -->
+  <section class="section bg-stone on-light" id="equipo" aria-labelledby="equipo-title">
+    <div class="container team">
+      <figure class="team-photo reveal">
+        <img src="assets/img/socios-matias-german.jpg" alt="Germán y Matías, ingenieros civiles y socios fundadores de CALIZA, con casco de obra" width="1080" height="851" loading="lazy">
+        <figcaption>De izquierda a derecha: Germán y Matías</figcaption>
+      </figure>
+      <div class="team-copy reveal">
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>04 — Quiénes somos</span>
+        <h2 id="equipo-title">Somos Matías y Germán, y juntos creamos CALIZA.</h2>
+        <p>Somos <strong>ingenieros civiles</strong> con experiencia en cálculo estructural, inspección y análisis de patologías en estructuras de hormigón. Nos especializamos en detectar fallas a tiempo y en ofrecer soluciones que garanticen la <strong>seguridad y durabilidad</strong> de cada construcción.</p>
+        <ul class="partners">
+          <li><b>Germán <span class="todo">[COMPLETAR: apellido]</span></b><span>Ingeniero civil · Mat. <span class="todo">[COMPLETAR]</span></span></li>
+          <li><b>Matías <span class="todo">[COMPLETAR: apellido]</span></b><span>Ingeniero civil · Mat. <span class="todo">[COMPLETAR]</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= FAQ ======================= -->
+  <section class="section on-light" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>05 — Preguntas frecuentes</span>
+        <h2 id="faq-title">Lo que suelen preguntarnos.</h2>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>¿La inspección daña la estructura?<span class="plus" aria-hidden="true"></span></summary>
+          <p>No. Utilizamos tecnología no destructiva, como el escaneo 2D, para evaluar el estado real de la estructura y ubicar armaduras, caños y zonas con humedad sin romper.</p>
+        </details>
+        <details>
+          <summary>¿Cómo empiezo?<span class="plus" aria-hidden="true"></span></summary>
+          <p>Escribinos por WhatsApp o por mail contándonos qué observás. Si podés, sumá fotos del problema: nos ayudan a entender el caso y coordinar la visita.</p>
+        </details>
+        <details>
+          <summary>¿En qué zona trabajan?<span class="plus" aria-hidden="true"></span></summary>
+          <p><span class="todo">[COMPLETAR: ciudades o región de cobertura]</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CONTACTO ======================= -->
+  <section class="section dark" id="contacto" aria-labelledby="contacto-title">
+    <div class="container contact-grid">
+      <div class="reveal">
+        <div class="section-head" style="margin-bottom:0">
+          <span class="label"><svg aria-hidden="true"><use href="#i-target"/></svg>06 — Contacto</span>
+          <h2 id="contacto-title">Contanos qué está pasando con tu estructura.</h2>
+          <p>Te respondemos y coordinamos la inspección.</p>
+        </div>
+        <ul class="contact-list">
+          <li><a class="js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero hacer una consulta." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span><small>WhatsApp</small><b>362 420-5886</b></span></a></li>
+          <li><a class="js-wa" href="https://wa.me/5493624384988" data-msg="Hola CALIZA, quiero hacer una consulta." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span><small>WhatsApp</small><b>362 438-4988</b></span></a></li>
+          <li><a href="mailto:caliza.ingcivil@gmail.com?subject=Consulta%20desde%20la%20web"><svg aria-hidden="true"><use href="#i-mail"/></svg><span><small>Email</small><b>caliza.ingcivil@gmail.com</b></span></a></li>
+          <li><a href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg><span><small>Instagram</small><b>@caliza.patologia</b></span></a></li>
+        </ul>
+      </div>
+
+      <!-- Formulario: arma el mensaje y lo abre en WhatsApp (sin backend) -->
+      <form class="form reveal on-light" id="contact-form" novalidate>
+        <h3>Pedí tu inspección</h3>
+        <p class="hint">Completá estos datos y se abrirá WhatsApp con tu mensaje listo para enviar.</p>
+        <div class="field">
+          <label for="f-name">Nombre</label>
+          <input id="f-name" name="nombre" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-city">Localidad</label>
+          <input id="f-city" name="localidad" type="text" autocomplete="address-level2">
+        </div>
+        <div class="field">
+          <label for="f-type">Motivo de la consulta</label>
+          <select id="f-type" name="motivo">
+            <option>Fisuras o grietas</option>
+            <option>Óxido o armaduras expuestas</option>
+            <option>Humedad o filtraciones</option>
+            <option>Detección de armaduras o caños</option>
+            <option>Cálculo estructural</option>
+            <option>Otra consulta</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-msg">Contanos brevemente</label>
+          <textarea id="f-msg" name="mensaje" placeholder="Dónde está el problema, desde cuándo, tipo de construcción…"></textarea>
+        </div>
+        <button class="btn btn-dark" type="submit"><svg aria-hidden="true"><use href="#i-wa"/></svg>Enviar por WhatsApp</button>
+        <p class="alt">¿Preferís mail? Escribinos a <a href="mailto:caliza.ingcivil@gmail.com">caliza.ingcivil@gmail.com</a></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <img src="assets/img/caliza-logo-horizontal.jpg" alt="CALIZA Patología Estructural" width="1079" height="300" loading="lazy">
+      <nav aria-label="Pie de página">
+        <a href="#servicios">Servicios</a>
+        <a href="#metodo">Cómo trabajamos</a>
+        <a href="#equipo">Equipo</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a href="https://www.instagram.com/caliza.patologia" target="_blank" rel="noopener">@caliza.patologia</a>
+    </div>
+    <p class="footer-legal">© <span id="year">2026</span> CALIZA Patología Estructural · <span class="todo">[COMPLETAR: ciudad, provincia]</span></p>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a class="wa-float js-wa" href="https://wa.me/5493624205886" data-msg="Hola CALIZA, quiero hacer una consulta." aria-label="Escribinos por WhatsApp" target="_blank" rel="noopener">
+  <svg aria-hidden="true"><use href="#i-wa"/></svg>
+</a>
+
+<script>
+/* =========================================================
+   JS — menú, header, revelado, WhatsApp
+   ========================================================= */
+(function(){
+  // Enlaces de WhatsApp con mensaje prellenado
+  document.querySelectorAll('.js-wa').forEach(function(a){
+    var msg = a.getAttribute('data-msg');
+    if(msg){ a.href = a.href.split('?')[0] + '?text=' + encodeURIComponent(msg); }
+    a.target = '_blank'; a.rel = 'noopener';
+  });
+
+  // Menú mobile
+  var toggle = document.querySelector('.menu-toggle');
+  var nav = document.getElementById('nav');
+  function closeNav(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); toggle.setAttribute('aria-label','Abrir menú'); }
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  });
+  nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeNav(); });
+
+  // Borde del header al scrollear
+  var header = document.querySelector('.site-header');
+  function onScroll(){ header.classList.toggle('scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // Revelado progresivo
+  var els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.08});
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add('in'); }); }
+
+  // Formulario → WhatsApp
+  var form = document.getElementById('contact-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = form.nombre.value.trim();
+    if(!name){ form.nombre.focus(); form.nombre.setAttribute('aria-invalid','true'); return; }
+    form.nombre.removeAttribute('aria-invalid');
+    var lines = ['Hola CALIZA, soy ' + name + '.'];
+    if(form.localidad.value.trim()) lines.push('Localidad: ' + form.localidad.value.trim());
+    lines.push('Motivo: ' + form.motivo.value);
+    if(form.mensaje.value.trim()) lines.push(form.mensaje.value.trim());
+    window.open('https://wa.me/5493624205886?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
