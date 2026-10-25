@@ -315,6 +315,14 @@ section{position:relative}
 .name-tag{position:absolute;left:var(--x);top:var(--y);transform:translateX(-50%);background:var(--white);color:var(--navy-950);font-family:var(--font-head);font-weight:700;font-size:clamp(.72rem,.65rem + .35vw,.9rem);letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;white-space:nowrap;box-shadow:0 6px 16px -8px rgba(0,0,0,.5)}
 .name-tag::before{content:"";position:absolute;left:50%;bottom:100%;width:2px;height:clamp(18px,4vw,34px);background:var(--white);transform:translateX(-50%)}
 .name-tag::after{content:"";position:absolute;left:50%;bottom:calc(100% + clamp(18px,4vw,34px) - 2px);transform:translateX(-50%);border:6px solid transparent;border-bottom:8px solid var(--white);border-top:0}
+.name-tag .tw{position:absolute;left:12px;top:6px;white-space:nowrap}
+.js .name-tag .ghost{visibility:hidden}
+.name-tag{transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.js .name-tag{opacity:0;transform:translate(-50%,12px) scale(.9)}
+.js .name-tag.on{opacity:1;transform:translateX(-50%)}
+.name-tag .tw::after{content:"";display:inline-block;width:2px;height:1em;background:currentColor;margin-left:2px;vertical-align:-2px;animation:blink .7s steps(1) infinite}
+.name-tag.done .tw::after{animation:none;opacity:0}
+@keyframes blink{50%{opacity:0}}
 .team-photo figcaption{margin-top:var(--s2);font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
 .team-copy h2{font-size:var(--fs-h2);color:var(--navy-950);margin-top:var(--s3)}
 .team-copy p{margin-top:var(--s4);color:var(--text-muted);font-size:var(--fs-lg);max-width:54ch}
@@ -721,8 +729,8 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
       <figure class="team-photo reveal">
         <div class="photo-wrap">
           <img src="assets/img/socios-matias-german.jpg" alt="Germán (izquierda) y Matías (derecha), ingenieros civiles y socios fundadores de CALIZA, con casco de obra" width="1080" height="851" loading="lazy">
-          <span class="name-tag" style="--x:31%;--y:52%" aria-hidden="true">Germán</span>
-          <span class="name-tag" style="--x:63%;--y:45%" aria-hidden="true">Matías</span>
+          <span class="name-tag" style="--x:18%;--y:84%" aria-hidden="true"><span class="ghost">Germán</span><span class="tw"></span></span>
+          <span class="name-tag" style="--x:84%;--y:84%" aria-hidden="true"><span class="ghost">Matías</span><span class="tw"></span></span>
         </div>
       </figure>
       <div class="team-copy reveal">
@@ -881,6 +889,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
    JS — menú, header, revelado, WhatsApp
    ========================================================= */
 (function(){
+  document.documentElement.classList.add('js');
   // Enlaces de WhatsApp con mensaje prellenado
   document.querySelectorAll('.js-wa').forEach(function(a){
     var msg = a.getAttribute('data-msg');
@@ -949,6 +958,30 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
     };
     track.addEventListener('scroll', function(){ window.requestAnimationFrame(setDot); }, {passive:true});
     setDot();
+  }
+
+  // Nombres sobre la foto: aparece el cartel y se escribe el nombre (máquina de escribir)
+  var photo = document.querySelector('.photo-wrap');
+  if(photo){
+    var tags = photo.querySelectorAll('.name-tag');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var typeTag = function(tag, delay){
+      var name = tag.querySelector('.ghost').textContent, out = tag.querySelector('.tw');
+      setTimeout(function(){
+        tag.classList.add('on');
+        if(reduced){ out.textContent = name; tag.classList.add('done'); return; }
+        var i = 0;
+        setTimeout(function step(){
+          out.textContent = name.slice(0, ++i);
+          if(i < name.length){ setTimeout(step, 110); } else { setTimeout(function(){ tag.classList.add('done'); }, 600); }
+        }, 380);
+      }, delay);
+    };
+    var go = function(){ Array.prototype.forEach.call(tags, function(t,i){ typeTag(t, i * 900); }); };
+    if('IntersectionObserver' in window){
+      var pio = new IntersectionObserver(function(en){ if(en[0].isIntersecting){ go(); pio.disconnect(); } }, {threshold:.5});
+      pio.observe(photo);
+    } else { go(); }
   }
 
   // Sube el botón de WhatsApp cuando se ve la firma, para no taparla
