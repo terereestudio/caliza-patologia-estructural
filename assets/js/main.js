@@ -163,9 +163,9 @@
   var IG_POSTS = [
     { url: 'https://www.instagram.com/reel/DewqN7RxznD/', cover: '' },
     { url: 'https://www.instagram.com/reel/Dec01E6RCgx/', cover: '' },
-    { url: 'https://www.instagram.com/reel/DMRDXH2M5_d/', cover: 'assets/img/reels/reel-3.jpg' },
-    { url: 'https://www.instagram.com/reel/DHcF9FisT8O/', cover: 'assets/img/reels/reel-4.jpg' },
-    { url: 'https://www.instagram.com/reel/DL3RuvtMP4e/', cover: 'assets/img/reels/reel-5.jpg' }
+    { url: 'https://www.instagram.com/reel/DMRDXH2M5_d/', cover: 'assets/img/reels/reel-3.webp' },
+    { url: 'https://www.instagram.com/reel/DHcF9FisT8O/', cover: 'assets/img/reels/reel-4.webp' },
+    { url: 'https://www.instagram.com/reel/DL3RuvtMP4e/', cover: 'assets/img/reels/reel-5.webp' }
   ];
   var igScriptLoaded = false;
   var loadEmbed = function(card, url){
@@ -195,17 +195,17 @@
       if(!/^https:\/\/www\.instagram\.com\/(p|reel)\/[A-Za-z0-9_-]+\/$/.test(post.url)) return;
       var card = el('article', 'ig-card');
       var head = el('div', 'ig-head-row');
-      var av = el('img', 'ig-avatar'); av.src = 'assets/img/favicon.png'; av.alt = ''; av.width = 28; av.height = 28;
+      var av = el('img', 'ig-avatar'); av.src = 'assets/img/favicon.webp'; av.alt = ''; av.width = 28; av.height = 28; av.loading = 'lazy'; av.decoding = 'async';
       head.appendChild(av); head.appendChild(el('b', null, 'caliza.patologia'));
       head.appendChild(extLink(IG_PROFILE, 'ig-profile', 'Ver perfil'));
       var play = el('button', 'ig-play'); play.type = 'button';
       play.setAttribute('aria-label', 'Reproducir reel ' + (i + 1) + ' (se cargará contenido de Instagram)');
       if(post.cover){
         var img = el('img'); img.src = post.cover; img.alt = 'Portada del reel ' + (i + 1) + ' de CALIZA';
-        img.width = 360; img.height = 640; img.loading = 'lazy'; play.appendChild(img);
+        img.width = 360; img.height = 640; img.loading = 'lazy'; img.decoding = 'async'; play.appendChild(img);
       } else {
         var brand = el('span', 'ig-cover-brand');
-        var logo = el('img'); logo.src = 'assets/img/caliza-isotipo.png'; logo.alt = ''; logo.width = 96; logo.height = 96;
+        var logo = el('img'); logo.src = 'assets/img/caliza-isotipo.webp'; logo.alt = ''; logo.width = 96; logo.height = 96; logo.loading = 'lazy'; logo.decoding = 'async';
         brand.appendChild(logo); brand.appendChild(el('span', null, 'Reel de CALIZA')); play.appendChild(brand);
       }
       play.appendChild(el('span', 'ig-play-icon'));
